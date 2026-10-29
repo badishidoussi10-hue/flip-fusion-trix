@@ -1,0 +1,1416 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101c21" />
+  <meta name="description" content="TRIX Belote : jeu de cartes à 4 places, avec amis ou IA, 7 contrats et scores automatiques." />
+  <title>TRIX Belote V13 — Chat et bulles près des joueurs</title>
+  <style>
+:root{--bg:#101c21;--panel:#17282c;--panel2:#1e3437;--ink:#f2f2e9;--muted:#a1b4b1;--teal:#90d1bc;--lime:#d6e49e;--stroke:#314347;--red:#b73c48;--paper:#faf7ed;--line:#e4e4d9;--max:1180px;font-family:'DM Sans',Arial,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}html{min-height:100%;scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 12% -10%,#26423e 0%,transparent 45%),var(--bg)}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed}button:focus-visible,input:focus-visible{outline:3px solid var(--teal);outline-offset:4px}button:not(:disabled){-webkit-tap-highlight-color:transparent}h1,h2,h3,p{margin-top:0}h1,h2,h3,.logo-mark{font-family:Outfit,'DM Sans',sans-serif;letter-spacing:-.035em}h1{font-weight:800}p{line-height:1.6}#app{min-height:100vh}.boot{padding:6rem;text-align:center}.brand{display:flex;gap:15px;align-items:center}.logo-mark{font-weight:900;font-size:31px;line-height:1;letter-spacing:-.055em}.logo-mark>span:not(.brand-dot){color:var(--lime)}.brand-dot{color:var(--teal)}.brand-sub{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.22em;border-left:1px solid var(--stroke);padding-left:14px;line-height:1.4}.section-kicker,.eyebrow,.panel-id{font-size:11px;letter-spacing:.16em;font-weight:800;color:var(--teal)}.landing{max-width:var(--max);margin:auto;padding:29px 34px 26px}.landing-header,.header{display:flex;justify-content:space-between;align-items:center;gap:16px}.landing-header{margin-bottom:55px}.live-pill{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--teal);border:1px solid #48615b;border-radius:50px;padding:11px 17px}.live-pill i,.pulse-circle{display:inline-block;width:7px;height:7px;border-radius:100%;background:var(--teal);box-shadow:0 0 0 4px #90d1bc24;margin-right:9px}.hero{display:grid;grid-template-columns:1.18fr .82fr;align-items:center;min-height:410px;margin-bottom:68px}.hero-content{position:relative;z-index:1}.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:24px}.eyebrow-line{width:24px;height:1px;background:var(--teal)}.hero h1{font-size:clamp(54px,6.45vw,91px);line-height:.99;margin:0 0 24px;letter-spacing:-.065em}.hero h1 em,.result-header h1 em{font-style:normal;color:var(--lime)}.hero p{font-size:15px;max-width:425px;color:#c6d0cb;margin-bottom:39px}.hero-stats{display:flex;align-items:flex-start;gap:35px}.hero-stats div{display:flex;flex-direction:column;gap:3px}.hero-stats strong{font-size:29px;line-height:1;font-family:Outfit,sans-serif}.hero-stats span{font-size:11px;color:var(--muted)}.hero-cards{height:405px;position:relative;transform:rotate(0);perspective:900px}.hero-card{position:absolute;top:50px;left:50%;width:205px;height:295px;border-radius:15px;box-shadow:16px 21px 42px #0006;display:flex;align-items:center;justify-content:center}.hero-card.back{background:repeating-linear-gradient(45deg,#749e91 0 3px,#37645b 3px 7px);border:10px solid #e1e5d4;outline:1px solid #e2e7da;transform:translateX(-79%) rotate(-22deg);top:65px}.hero-card.front{background:var(--paper);border:1px solid #eee;color:var(--red)}.hero-card.b{transform:translateX(-41%) rotate(-5deg);top:54px}.hero-card.c{transform:translateX(-5%) rotate(14deg);top:65px;color:#173138}.hero-rank{position:absolute;left:16px;top:13px;font:bold 23px/.85 Outfit,sans-serif;text-align:center}.hero-rank.bottom{left:auto;top:auto;right:16px;bottom:13px;transform:rotate(180deg)}.hero-symbol{font-size:128px;line-height:1;filter:drop-shadow(1px 3px 2px #0001)}.hero-symbol.dark{color:#18363c}.entry{background:#f2f1e6;color:#1b2e31;border-radius:19px;padding:38px 40px 41px;box-shadow:0 20px 80px #0002}.entry-heading{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px}.entry .section-kicker{color:#487869}.entry h2{font-size:35px;margin:8px 0 0}.tiny-note{font-size:12px;color:#748883}.entry-panels{display:grid;grid-template-columns:1fr 1fr;gap:18px}.entry-panel{background:#fffefa;border:1px solid #dfe4db;border-radius:13px;padding:26px}.entry-panel.second{background:#e9eee5}.panel-id{color:#5a8f7e}.entry-panel h3{font-size:26px;margin:9px 0 6px}.entry-panel p{font-size:12px;line-height:1.6;color:#687e79;min-height:42px;margin-bottom:20px}.field-label{display:block;font-weight:800;font-size:11px;color:#455a55;letter-spacing:.045em;margin:15px 0 8px}.field{width:100%;border:1px solid #d3dbd1;background:#fff;border-radius:8px;height:48px;padding:0 14px;color:#203536;outline:none}.field:focus{border-color:#528b78;box-shadow:0 0 0 3px #80baa52f}.field::placeholder{color:#9baa9f}.code-field{font-weight:800;letter-spacing:.17em;text-transform:uppercase}.mode-pills{display:flex;gap:8px;margin-bottom:20px}.mode-pill{border:1px solid #d3dbd1;background:transparent;border-radius:8px;padding:10px 12px;color:#243d3c;font-size:12px;font-weight:800;flex:1}.mode-pill small{display:block;font-size:10px;font-weight:500;color:#84958b;margin-top:3px}.mode-pill.selected{background:#dceadd;border-color:#78aa91}.primary-btn,.secondary-btn{width:100%;display:flex;align-items:center;justify-content:space-between;border:none;border-radius:9px;font-size:13px;font-weight:800;padding:16px 20px;min-height:52px}.primary-btn{background:#b9d79f;color:#203b31}.primary-btn:hover:not(:disabled){background:#d2e6bd}.primary-btn:disabled{background:#b6bdb3;color:#f4f6ef}.secondary-btn{background:#1f3c3c;color:#fff;margin-top:20px}.secondary-btn:hover{background:#315454}.primary-btn span,.secondary-btn span{font-size:23px;font-weight:400;line-height:1}.resume-link{border:0;background:transparent;color:#476958;text-decoration:underline;padding:18px 0 0;font-size:12px}.landing-footer{display:flex;justify-content:space-between;gap:20px;margin-top:28px;color:#829a97;font-size:11px}.landing-footer button{background:transparent;border:0;color:var(--teal);font-size:11px}.header{padding:24px max(28px,calc((100vw - var(--max))/2 + 30px));border-bottom:1px solid #2b4041;background:#102125cf;backdrop-filter:blur(14px);position:relative;z-index:3}.header-right{display:flex;align-items:center;gap:9px}.chip-online{font-size:12px;color:#cce1d7;margin-right:11px;font-weight:700}.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#768681;flex:none;margin-right:5px}.status-dot.online{background:#8ed3ad;box-shadow:0 0 0 3px #8ed3ad19}.status-dot.offline{background:#7d8984}.icon-btn{font-size:11px;color:#d1e0d9;border:1px solid #435856;background:transparent;border-radius:6px;padding:11px 13px;white-space:nowrap}.icon-btn:hover,.outline-btn:hover{border-color:#b6d8b7;color:#fff}.game-main{max-width:var(--max);margin:0 auto;padding:42px 30px 70px}.room-heading,.match-top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:26px}.room-heading h1,.match-top h1{font-size:clamp(34px,4.5vw,53px);margin:5px 0 3px}.room-heading p,.match-top p{color:var(--muted);font-size:13px;margin:0}.title-period{color:var(--lime)}.room-code-box{border:1px dashed #6d9a85;background:#182c2b;padding:16px 22px;text-align:center;min-width:196px;border-radius:11px}.room-code-box span{display:block;color:#92b2aa;font-size:9px;letter-spacing:.13em;font-weight:800}.room-code-box strong{font-family:Outfit;font-size:31px;letter-spacing:.16em;display:block;margin:5px 0;color:var(--lime)}.room-code-box button{border:none;background:none;color:var(--teal);font-size:10px;text-decoration:underline;cursor:pointer}.lobby-layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(285px,.75fr);gap:21px}.lobby-card,.info-panel{background:#17282c;border:1px solid #34504c;border-radius:13px;padding:26px}.panel-top{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--stroke);padding-bottom:18px}.panel-top h2{margin:0;font-size:22px}.panel-top span{font-size:11px;color:var(--teal)}.lobby-seats{margin-bottom:24px}.lobby-seat{display:flex;align-items:center;gap:15px;padding:15px 0;border-bottom:1px solid #314446;min-height:75px}.avatar{width:44px;height:44px;border-radius:10px;background:#29403e;border:1px dashed #60736a;display:grid;place-items:center;color:#b7c8ba;font-weight:800;font-size:19px}.lobby-seat.occupied .avatar{background:#b0d6b1;color:#1d3831;border:0}.lobby-seat>div:nth-child(2){flex:1}.lobby-seat strong{display:block;font-size:14px}.lobby-seat small{font-size:11px;color:var(--muted);margin-top:4px;display:block}.online-word{font-size:9px;font-weight:900;letter-spacing:.1em;color:var(--teal)}.remove-seat{font-size:10px;background:transparent;border:1px solid #5e6660;color:#e0dfce;border-radius:5px;padding:7px}.info-panel h3{font-size:26px;margin:10px 0}.info-panel p{font-size:13px;color:#adc5bb;margin-bottom:25px}.info-line{display:flex;justify-content:space-between;border-top:1px solid #344948;padding:13px 0;font-size:11px}.info-line span{color:#8fa69e}.info-line strong{font-weight:700}.outline-btn{border:1px solid #45645b;background:transparent;color:var(--teal);font-size:12px;font-weight:700;border-radius:9px;min-height:48px;width:100%;margin-top:15px}.lobby-hint{font-size:11px;color:#8ca29a;line-height:1.55}.waiting-state{display:flex;gap:9px;align-items:center;font-size:12px;color:var(--teal);padding-top:7px}.selection-owner,.score-tip{font-size:12px;color:#b4cac0;background:#223a39;padding:12px 15px;border:1px solid #375a50;border-radius:8px}.selection-owner strong{color:#fff}.score-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:28px}.score-tile{background:#1b3031;border:1px solid #35504d;border-radius:10px;padding:16px}.score-tile.is-me{border-color:#8bbd9e;background:#24413b}.score-player{font-size:12px;color:#d1e3d6;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.score-index{font-size:10px;color:#8daaa0;margin-right:10px}.score-num{font:800 29px Outfit,sans-serif;margin:10px 0 1px;letter-spacing:-.06em}.score-num small{font:500 11px 'DM Sans',sans-serif;color:#9cb0a9;margin-left:6px}.score-round{font-size:10px;color:#93b3a7}.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}.section-header h2{font-size:21px;margin:0}.section-header span{font-size:11px;color:var(--muted)}.contract-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.contract-card{color:#ecf3e8;border:1px solid #3a5650;text-align:left;border-radius:10px;background:#1a3132;display:flex;gap:15px;align-items:center;padding:20px;min-height:105px;transition:background .12s,transform .12s}.contract-card:hover:not(:disabled){background:#31554c;transform:translateY(-2px);border-color:#a5ccad}.contract-card.featured{background:#2f4337}.contract-card.used{opacity:.35}.contract-icon{flex:none;border:1px solid #567467;border-radius:8px;width:54px;height:55px;display:grid;place-items:center;color:#d7e9b5;font-family:Outfit;font-size:29px;font-weight:800}.contract-body{flex:1;min-width:0}.contract-body strong,.contract-body small{display:block}.contract-body strong{font-size:17px;margin-bottom:5px}.contract-body small{font-size:11px;color:#aabdb4;line-height:1.5}.contract-arrow{font-size:21px;color:#a1b9a9}.playing-page{padding-top:32px}.match-top.tight{margin-bottom:21px}.match-top.tight h1{font-size:39px}.playing-page .score-grid{margin-bottom:18px}.playing-page .score-tile{padding:12px 14px}.playing-page .score-num{font-size:25px;margin:5px 0}.felt-board{background:radial-gradient(circle at 50% 50%,#2b6257 0%,#1a514a 55%,#103c38 100%);border:7px solid #1d3e3c;outline:1px solid #466359;box-shadow:0 20px 60px #0002,inset 0 0 90px #032b263a;border-radius:24px;min-height:300px;position:relative;overflow:hidden;padding:22px}.felt-pattern{position:absolute;inset:0;opacity:.15;pointer-events:none;background-image:repeating-linear-gradient(45deg,transparent 0,transparent 5px,#fff 5.5px,transparent 6px)}.board-topline{position:relative;display:flex;justify-content:space-between;align-items:center;gap:12px}.board-label{font-size:10px;letter-spacing:.15em;font-weight:800;color:#b5d1c0}.turn-status{background:#204d45;border:1px solid #679b82;padding:9px 15px;border-radius:50px;color:#dbf5dd;font-size:11px;font-weight:800}.turn-status.your-turn{background:#d7e7a7;color:#15352c;border-color:#eff6cb}.board-players{position:relative;min-height:250px;max-width:710px;margin:0 auto;display:grid;grid-template-columns:90px 1fr 90px;grid-template-rows:70px 1fr 70px;align-items:center}.board-seat{display:flex;align-items:center;gap:4px;flex-direction:column;z-index:1;max-width:100px}.bseat-0{grid-column:2;grid-row:1;justify-self:center}.bseat-1{grid-column:1;grid-row:2;justify-self:center}.bseat-2{grid-column:3;grid-row:2;justify-self:center}.bseat-3{grid-column:2;grid-row:3;justify-self:center}.board-avatar{background:#29584d;width:31px;height:31px;display:grid;place-items:center;border-radius:100%;border:1px solid #79a98e;font-weight:800;font-size:12px}.board-avatar.active{background:#dbebac;color:#24443b}.board-seat small{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px}.turn-dot{display:none}.table-cards{grid-column:2;grid-row:2;display:flex;align-items:center;justify-content:center;gap:10px;min-width:0}.table-card-wrap{display:flex;flex-direction:column;align-items:center;gap:4px}.table-card-wrap span{font-size:9px;color:#cbdccf;max-width:80px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.table-placeholder{border:1px dashed #96b5a18a;padding:25px;border-radius:13px;text-align:center;color:#b8d3be;min-width:190px}.table-placeholder span{font:900 43px Outfit;letter-spacing:-.05em;display:block;opacity:.45}.table-placeholder small{display:block;font-size:9px;letter-spacing:.05em}.playing-card{position:relative;display:inline-flex;flex:none;align-items:center;justify-content:center;width:68px;height:102px;border-radius:8px;background:linear-gradient(150deg,#fff 5%,#f7f4ec 100%);border:1px solid #f5f5ee;color:#1a3238;box-shadow:0 4px 10px #0003;transition:transform .14s,box-shadow .14s;user-select:none;touch-action:manipulation}.playing-card.red{color:#bf3946}.playing-card.black{color:#182e33}.playing-card:disabled{opacity:.53;filter:saturate(.5);box-shadow:none}.table-card-wrap .playing-card:disabled{opacity:1;filter:none}.playing-card:not(:disabled):hover{transform:translateY(-13px);box-shadow:0 13px 25px #0006}.card-corner{position:absolute;left:6px;top:6px;text-align:center;line-height:1.04;display:flex;flex-direction:column}.card-corner b{font:bold 16px Outfit,sans-serif}.card-corner em{font:normal 14px serif}.card-corner.inverted{left:auto;top:auto;right:6px;bottom:6px;transform:rotate(180deg)}.card-suit{font-size:36px;line-height:1}.last-result{font-size:11px;color:#e3ebd6;text-align:center;margin-top:5px;position:relative}.last-result strong{color:#fff}.hand-area{background:#182c2e;border:1px solid #3a524b;border-radius:13px;margin-top:23px;padding:20px 21px 15px}.hand-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.hand-header h2{font-size:24px;margin:3px 0 0}.hand-directions{font-size:12px;color:#c5e4c8;font-weight:700}.hand-cards{display:flex;align-items:flex-start;justify-content:center;flex-wrap:wrap;gap:9px;min-height:115px}.hand-cards .playing-card{width:76px;height:112px}.hand-cards .playing-card:not(:disabled){box-shadow:0 0 0 2px #86bba181,0 5px 17px #0004}.hand-hint{color:#8ba9a0;font-size:11px;margin:13px 0 0;text-align:center}.history-strip{margin-top:24px;color:#d4e1d8}.history-strip h3{font-size:16px;margin-bottom:12px}.activity-items{display:flex;gap:8px;flex-wrap:wrap}.activity-items span{padding:9px 12px;border:1px solid #39514c;border-radius:6px;color:#b1c9bd;font-size:10px}.activity-items b{color:#e5efb9;margin-left:4px}.trix-piles{position:relative;padding:25px 0 10px;max-width:720px;margin:auto}.trix-suit-row{display:flex;gap:14px;align-items:center;margin:10px 0}.trix-suit-name{font-size:30px;width:36px;text-align:center;color:#f1f6dc}.trix-suit-name.red{color:#ffb4b0}.trix-slots{display:flex;gap:5px;flex:1}.trix-slot{display:grid;place-items:center;min-width:0;flex:1;height:47px;border-radius:6px;border:1px dashed #80b5a16b;color:#a5c4ad88;font-size:15px;font-weight:800}.trix-slot i{font:800 17px Outfit}.trix-slot.played{background:#f8f7ea;border:1px solid #fff;color:#273d3d;box-shadow:0 3px 9px #0003}.trix-slot.played.red{color:#b63e4a}.trix-finish{position:relative;color:#dce8cb;text-align:center;font-size:11px;padding-bottom:13px}.result-header{text-align:center;padding:18px 0 25px}.result-header h1{font-size:clamp(37px,5vw,62px);margin:10px 0}.result-header p{color:var(--muted);font-size:13px}.result-glyph,.trophy-outline{display:grid;place-items:center;border-radius:100%;height:84px;width:84px;margin:18px auto;background:#2e4b3f;border:1px solid #86af94;color:#d6eaa5;font:800 45px Outfit}.trophy-outline{font-size:44px}.results-card{max-width:700px;margin:0 auto 30px;background:#1b3031;padding:23px 30px;border:1px solid #456158;border-radius:14px}.results-card h2{font-size:21px;padding-bottom:10px}.result-row{display:flex;align-items:center;gap:17px;min-height:72px;border-top:1px solid #3a514b}.result-pos{font-family:Outfit;font-size:20px;color:#7ba694}.result-name{font-size:14px;font-weight:700;flex:1}.result-row>strong{font-family:Outfit;font-size:25px;font-weight:800;color:#e7f3dd}.result-row>strong.negative{color:#d0eda9}.results-bottom{max-width:940px;margin:0 auto}.next-btn{max-width:500px;margin:0 auto}.end-card{margin-top:28px}.end-card .winner{background:#2b483d;padding:0 13px;border-radius:9px}.winner-tag{font-size:9px;background:#cfe5aa;color:#294031;border-radius:4px;padding:6px 8px;margin-left:8px;letter-spacing:.06em;vertical-align:middle}.history-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #3b514b;color:#9bb6a8;font-size:12px}.history-row strong{font-weight:700;color:#d8e5cf}.overlay{position:fixed;z-index:20;inset:0;background:#020d0cbb;display:grid;place-items:center;padding:16px}.rules-modal{max-width:650px;max-height:min(90vh,850px);overflow:auto;background:#f5f5e9;color:#1d3636;border-radius:16px;padding:27px 32px 32px;box-shadow:0 30px 90px #0009}.rules-top{display:flex;align-items:flex-start;justify-content:space-between;gap:30px}.rules-top h2{font-size:32px;margin:7px 0 12px}.rules-top .section-kicker{color:#48806a}.close-btn{font:300 29px DM Sans;border:0;background:#dce6d9;color:#1b3e32;width:38px;height:38px;border-radius:9px}.rules-modal p{font-size:13px;color:#4c6760}.rules-list>div{display:flex;justify-content:space-between;gap:22px;padding:11px 0;border-top:1px solid #d5dfd6}.rules-list strong{font-size:13px;min-width:142px}.rules-list strong span{display:inline-grid;place-items:center;width:23px;height:25px;color:#a8414d}.rules-list small{font-size:12px;color:#54766d;text-align:right}.rules-note{font-size:12px;line-height:1.6;background:#e0eadd;padding:14px;border-radius:9px;margin-top:18px}.rules-foot{margin:14px 0 0}.toast{position:fixed;z-index:30;bottom:24px;left:50%;transform:translateX(-50%);background:#e8f0da;color:#183c32;max-width:min(92vw,600px);font-size:12px;font-weight:700;padding:13px 17px;border-radius:9px;box-shadow:0 9px 34px #0006;display:flex;align-items:center;gap:24px}.toast button{background:transparent;color:#183c32;border:0;font-size:19px}.connect-screen{min-height:95vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;text-align:center;padding:20px}.connect-screen h1{font-size:29px;margin:10px 0 0}.connect-screen p{color:var(--muted)}.connect-screen .outline-btn{max-width:200px}.spin{width:40px;height:40px;border-radius:50%;border:3px solid #386055;border-top-color:#cae5b0;margin-top:36px;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:950px){.hero-cards{transform:scale(.9)}.hero h1{font-size:63px}.hand-cards{gap:6px}.hand-cards .playing-card{width:67px;height:100px}.board-players{min-height:245px}.score-grid{gap:8px}.score-tile{padding:11px}.score-index{display:none}}
+@media(max-width:700px){.landing{padding:22px 17px}.landing-header{margin-bottom:34px}.brand-sub{font-size:8px}.logo-mark{font-size:27px}.live-pill{font-size:9px;padding:8px 9px}.hero{display:block;margin-bottom:36px}.hero h1{font-size:clamp(51px,12vw,77px)}.hero p{font-size:13px}.hero-cards{height:210px;max-width:290px;margin:14px auto 0;transform:scale(.6);transform-origin:50% 7%}.hero-card{top:0;left:50%}.hero-card.back{top:5px}.hero-card.b{top:0}.hero-card.c{top:5px}.hero-stats{gap:20px}.entry{padding:26px 15px;border-radius:14px}.entry h2{font-size:30px}.entry-heading{gap:15px}.tiny-note{display:none}.entry-panels{grid-template-columns:1fr}.entry-panel{padding:20px}.entry-panel p{min-height:0}.landing-footer{flex-wrap:wrap}.header{padding:16px}.header .brand-sub{display:none}.header-right{gap:6px}.chip-online{font-size:10px;margin-right:0}.icon-btn{font-size:10px;padding:8px}.game-main{padding:30px 15px 55px}.room-heading,.match-top{align-items:flex-start;flex-direction:column}.room-heading h1,.match-top h1{font-size:39px}.room-code-box{min-width:100%;margin-top:7px}.lobby-layout{grid-template-columns:1fr}.lobby-card,.info-panel{padding:19px}.contract-grid{grid-template-columns:1fr}.contract-card{min-height:90px;padding:14px}.score-grid{gap:7px}.score-tile{padding:9px 7px}.score-player{font-size:10px}.score-num{font-size:20px}.score-num small{display:none}.score-round{font-size:8px}.playing-page .score-tile{padding:9px 6px}.playing-page .score-num{font-size:20px}.playing-page .match-top h1{font-size:35px}.score-tip{display:none}.felt-board{padding:14px 8px;border-width:5px;min-height:290px;border-radius:17px}.board-topline{padding:0 6px}.board-label{font-size:9px}.turn-status{font-size:9px;padding:8px}.board-players{grid-template-columns:60px 1fr 60px;min-height:258px}.board-seat small{max-width:60px;font-size:9px}.table-cards{gap:3px;flex-wrap:wrap}.table-card-wrap .playing-card{width:48px;height:75px}.table-card-wrap .card-corner b{font-size:12px}.table-card-wrap .card-corner em{font-size:11px}.table-card-wrap .card-suit{font-size:25px}.table-card-wrap span{font-size:8px;max-width:51px}.hand-area{padding:16px 8px 13px}.hand-cards{gap:5px}.hand-cards .playing-card{width:clamp(38px,11.1vw,64px);height:86px}.hand-cards .card-suit{font-size:28px}.hand-cards .card-corner{left:4px;top:4px}.hand-cards .card-corner.inverted{left:auto;top:auto;right:4px;bottom:4px}.hand-cards .card-corner b{font-size:12px}.hand-cards .card-corner em{font-size:11px}.hand-header h2{font-size:21px}.hand-directions{font-size:10px}.trix-piles{padding:25px 0}.trix-suit-row{gap:6px}.trix-suit-name{width:23px;font-size:23px}.trix-slots{gap:2px}.trix-slot{height:36px;font-size:12px}.trix-slot i{font-size:13px}.results-card{padding:19px}.result-header h1{font-size:43px}.rules-modal{padding:22px 17px}.rules-list>div{gap:10px;flex-direction:column}.rules-list small{text-align:left;padding-left:28px}}
+@media(max-width:370px){.header .icon-btn{padding:7px 5px;font-size:9px}.header .chip-online{font-size:9px}.board-players{grid-template-columns:50px 1fr 50px}.hand-cards{gap:3px}.hand-cards .playing-card{width:37px;height:77px}}
+@media(max-width:700px){.hand-cards{gap:3px}.hand-cards .playing-card{width:clamp(31px,10.2vw,40px)}}
+@media(max-width:370px){.hand-cards .playing-card{width:min(9.7vw,36px)}}
+
+.solo-btn{width:100%;display:flex;align-items:center;justify-content:space-between;background:#e1f1dd;color:#204139;border:1px solid #7aaa91;border-radius:9px;font-size:13px;font-weight:800;padding:13px 18px;margin-top:12px;min-height:48px}.solo-btn:hover{background:#cbebc1}.solo-btn span{font-size:20px}.offline-hint{font-size:11px;color:#577266;margin-top:9px}.fill-bots{margin:0 0 14px;background:#304d42;color:#def4dc;border-color:#6ca68b}.fill-bots:hover{background:#406d56}.add-ai{background:#a6d6af;color:#1a3d30;border:0;border-radius:7px;padding:8px 10px;font-weight:800;font-size:11px;white-space:nowrap}.add-ai:hover{background:#d0efc6}.bot-tag{display:inline-block;padding:2px 5px;background:#a5d6b7;color:#153c2d;border-radius:4px;font-size:9px;font-weight:900;letter-spacing:.05em;margin-left:5px}.disconnected-controls{margin:12px 0;border:1px solid #e8a7a7;background:#412b30;color:#f4d5d5;padding:11px 14px;border-radius:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px}.disconnected-controls button{border:1px solid #b5d0c0;background:#cbe5c6;color:#284232;border-radius:6px;padding:8px 10px;font-size:11px;font-weight:800}@media(max-width:700px){.add-ai{font-size:10px;padding:7px}.disconnected-controls{flex-direction:column;align-items:stretch}}
+
+/* V2 : les cartes sont visibles AVANT le choix du contrat. */
+.predeal-hand{margin:0 0 30px;padding:25px 22px 27px;background:#203a37;border:1px solid #659682;border-radius:16px}
+.predeal-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:20px}
+.predeal-heading h2{font-size:24px;margin:7px 0}
+.predeal-heading p{font-size:13px;color:#d3e7dc;margin:0}
+.dealt-tag{white-space:nowrap;font-size:11px;font-weight:800;background:#d5e7c1;color:#294b3b;border-radius:30px;padding:9px 12px}
+.select-hand .playing-card:disabled{opacity:1;filter:none;box-shadow:0 5px 15px #0005}
+.select-hand .playing-card{width:75px;height:111px}
+/* Centre du tapis : cartes sur 2 lignes, avec couleurs agrandies et noms visibles. */
+.board-players{min-height:405px}
+.table-cards{display:grid;grid-template-columns:repeat(2, minmax(82px,96px));gap:10px 16px;justify-content:center;align-content:center;min-width:0;min-height:260px}
+.table-card-wrap{min-width:0;gap:5px}
+.table-card-wrap .playing-card{width:76px;height:105px;border:2px solid #fff}
+.table-card-wrap .card-suit{font-size:43px;font-family:Georgia,'Times New Roman',serif;line-height:1}
+.table-card-wrap .card-corner b{font-size:17px}
+.table-card-wrap .card-corner em{font-size:15px}
+.table-card-wrap .table-player-label{max-width:88px;font-size:11px;font-weight:700;color:#e8f4e7}
+.table-card-wrap .table-suit-label{display:inline-flex;justify-content:center;gap:4px;align-items:center;font-size:10px;font-weight:800;max-width:100px;white-space:nowrap;background:#d7e4d7;color:#213e3b;border-radius:20px;padding:3px 8px}
+.table-card-wrap .table-suit-label.is-red{background:#ffe3e1;color:#a62838}
+.table-placeholder{grid-column:1 / -1}
+/* La règle générique de légende ne doit pas décolorer les symboles DANS les cartes. */
+.table-card-wrap .playing-card .card-suit,
+.table-card-wrap .playing-card .card-corner{max-width:none;overflow:visible;white-space:normal}
+.table-card-wrap .playing-card.red .card-suit,
+.table-card-wrap .playing-card.red .card-corner{color:#bf283e}
+.table-card-wrap .playing-card.black .card-suit,
+.table-card-wrap .playing-card.black .card-corner{color:#182e33}
+.table-card-wrap .playing-card:disabled{opacity:1;filter:none}
+/* Les piles du Trix représentent les cartes et leurs couleurs, et non des cases ambiguës. */
+.trix-suit-name{font-size:36px;width:43px}
+.trix-slot{display:flex;flex-direction:column;gap:1px;align-items:center;justify-content:center;height:63px;font-weight:800}
+.trix-slot .mini-rank{font-family:Outfit,Arial,sans-serif;font-size:14px;line-height:1.1}
+.trix-slot .mini-suit{font-family:Georgia,serif;font-size:20px;line-height:1}
+.trix-slot.played{background:#fdfbf3;color:#172d33}
+.trix-slot.played.red{color:#ba283b}
+.trix-slot:not(.played){opacity:.48}
+@media(max-width:700px){
+ .predeal-hand{padding:20px 10px 22px}
+ .predeal-heading{flex-direction:column;gap:9px}
+ .select-hand{flex-wrap:nowrap;gap:3px}
+ .select-hand .playing-card{width:clamp(29px,9.2vw,40px);height:86px}
+ .board-players{min-height:380px;grid-template-columns:52px 1fr 52px}
+ .table-cards{grid-template-columns:repeat(2,minmax(60px,78px));gap:8px;min-height:258px}
+ .table-card-wrap .playing-card{width:56px;height:80px}
+ .table-card-wrap .card-suit{font-size:34px}
+ .table-card-wrap .card-corner b{font-size:12px}
+ .table-card-wrap .card-corner em{font-size:11px}
+ .table-card-wrap .table-player-label{font-size:9px;max-width:78px}
+ .table-card-wrap .table-suit-label{font-size:9px;padding:3px 5px}
+ .trix-suit-name{font-size:25px;width:26px}
+ .trix-slot{height:48px;border-radius:5px}
+ .trix-slot .mini-rank{font-size:11px}
+ .trix-slot .mini-suit{font-size:16px}
+}
+@media(max-width:370px){
+ .select-hand .playing-card{width:min(9.7vw,36px)}
+ .table-cards{grid-template-columns:repeat(2,minmax(58px,70px));gap:7px}
+ .board-players{grid-template-columns:47px 1fr 47px}
+ .trix-slot{height:43px}
+ .trix-slot .mini-rank{font-size:10px}
+ .trix-slot .mini-suit{font-size:14px}
+}
+.chef-double{display:inline-block;color:#1b3d32;background:#c5e7af;border-radius:5px;font-size:10px;font-weight:900;padding:4px 7px;margin-left:9px;vertical-align:middle}.selection-owner{border-color:#93c69c}.small-tag{background:#cee3a7;color:#234034}
+.hearts-status{display:inline-block;margin-left:10px;font-size:10px;font-weight:900;padding:5px 8px;border-radius:6px;letter-spacing:.01em;text-transform:none}.hearts-status.blocked{color:#ffc3bf;background:#6d3036;border:1px solid #a64b50}.hearts-status.released{color:#d6f1ce;background:#275a47;border:1px solid #45826a}
+
+/* Bilan de fin de manche : répartition + huit plis détaillés. */
+.tricks-recap{margin:24px 0 28px;background:#e9efe6;border-radius:16px;padding:25px;color:#253a39}
+.tricks-recap-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:19px}
+.tricks-recap-head h2{font-size:26px;margin:5px 0}
+.tricks-recap-head p{font-size:12px;color:#627870;margin:0}
+.tricks-count-pill{background:#d0e2ce;padding:9px 12px;border-radius:20px;color:#325549;font-size:12px;font-weight:800;white-space:nowrap}
+.trick-count-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-bottom:17px}
+.trick-count-tile{background:#f9fbf6;border:1px solid #d9e4db;border-radius:11px;padding:14px 12px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.trick-count-tile .trick-count-name{font-size:12px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trick-count-tile strong{font:800 27px/1 'Outfit',Arial,sans-serif;color:#285445}
+.trick-count-tile small{color:#60756c;font-size:10px}
+.tricks-list{display:grid;gap:12px}
+.trick-detail{background:#fdfcf8;border:1px solid #d3ddd1;border-radius:13px;padding:15px}
+.trick-detail-head{display:flex;align-items:center;gap:11px}
+.trick-number{display:flex;justify-content:center;align-items:center;flex:none;width:34px;height:34px;border-radius:9px;background:#d8e7d8;color:#2c5e4c;font-size:12px;font-weight:900}
+.trick-winner{display:flex;flex-direction:column;min-width:0;gap:2px;flex:1}
+.trick-winner>span{font-size:10px;color:#688076}
+.trick-winner strong{font-size:14px;overflow-wrap:anywhere}
+.trick-points{flex:none;display:flex;align-items:flex-end;flex-direction:column;font-size:15px;font-weight:900;color:#9c3e46;white-space:nowrap}
+.trick-points.zero{color:#537368}
+.trick-points small{font-size:9px;color:#536d60}
+.trick-played-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:14px 0 11px}
+.trick-play{border:1px solid #e2e6db;border-radius:9px;background:#f1f5ed;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;padding:9px 5px;min-width:0}
+.trick-play.win{border-color:#85b591;background:#e4f2e2}
+.played-by{font-size:10px;font-weight:700;line-height:1.2;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.captured-card{display:flex;align-items:center;justify-content:center;gap:3px;min-width:49px;height:42px;border:1px solid #dcddd5;border-radius:6px;background:#fff;color:#1d3137;box-shadow:0 2px 6px #1b312b12}
+.captured-card.red{color:#bf2b40}
+.captured-card strong{font-size:16px;line-height:1}
+.captured-card span{font:24px/1 Georgia,serif}
+.played-winner{font-size:9px;color:#326d52;font-weight:900;line-height:1.2}
+.trick-breakdown{display:flex;gap:5px;flex-wrap:wrap}
+.trick-breakdown>span{background:#ecf0e7;border-radius:6px;color:#52665a;padding:5px 7px;font-size:10px;font-weight:700}
+.trix-arrival-list{display:grid;gap:8px}
+.trix-arrival-row{display:flex;align-items:center;gap:12px;border-radius:9px;background:#fff;padding:12px}
+.trix-arrival-row strong{flex:1;min-width:0;overflow-wrap:anywhere}
+@media(max-width:700px){
+.tricks-recap{padding:14px 10px;margin:18px 0}
+.tricks-recap-head{align-items:flex-start;flex-direction:column;gap:7px}
+.tricks-recap-head h2{font-size:22px}
+.trick-count-grid{gap:5px}
+.trick-count-tile{padding:9px 5px}
+.trick-count-tile .trick-count-name{font-size:9px}
+.trick-count-tile strong{font-size:22px}
+.trick-count-tile small{font-size:9px}
+.trick-detail{padding:10px 7px}
+.trick-detail-head{gap:7px}
+.trick-number{width:29px;height:29px;font-size:11px}
+.trick-winner strong{font-size:12px}
+.trick-points{font-size:12px}
+.trick-played-cards{gap:4px}
+.trick-play{padding:7px 1px;gap:4px}
+.played-by{font-size:9px}
+.captured-card{min-width:39px;height:38px;gap:2px}
+.captured-card strong{font-size:13px}
+.captured-card span{font-size:21px}
+}
+
+
+/* V6 · Casino social, avatars, effets et table étoffée */
+.header-right{flex-wrap:wrap;justify-content:flex-end}
+.audio-button{min-width:63px;background:#263d3c;border-color:#58766b;color:#ecf7e9}
+.audio-button.is-off{opacity:.6}
+.audio-button .audio-led{display:inline-block;width:6px;height:6px;margin-right:6px;background:#a4e3a4;border-radius:50%;box-shadow:0 0 10px #9fe7a6}
+.audio-button.is-off .audio-led{background:#8f9691;box-shadow:none}
+.avatar-picker{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.avatar-choice{width:48px;height:48px;border:2px solid #d7e7d1;border-radius:13px;background:#e8eee5;padding:3px;display:grid;place-items:center;transition:transform .17s,border-color .17s,box-shadow .17s}
+.avatar-choice:hover{transform:translateY(-3px)}
+.avatar-choice.selected{border-color:#368963;box-shadow:0 0 0 3px #aad7b6,0 5px 18px #153b3020;transform:translateY(-2px)}
+.avatar-choice svg{width:100%;height:100%}
+.avatar-picker.lobby-avatar-picker .avatar-choice{width:37px;height:37px;background:#24443d;border-color:#3d6253}
+.avatar-picker.lobby-avatar-picker .avatar-choice.selected{border-color:#bce9aa;box-shadow:0 0 0 2px #bce9aa55}
+.picker-label{font-size:11px;color:#537367;font-weight:800;margin-bottom:6px}
+.lobby-avatar-picker{background:#1a3433;border:1px solid #3b5d53;padding:10px;border-radius:11px;margin:5px 0 18px}
+.lobby-avatar-picker .picker-label{color:#b7d7ca;flex-basis:100%;margin-bottom:0}
+.avatar-face{width:100%;height:100%;display:block;border-radius:50%}
+.avatar.avatar-portrait,.board-avatar,.score-portrait{border-radius:50%;padding:0;overflow:hidden;display:block;border:2px solid #7fae91;background:#24493e;box-shadow:0 3px 9px #0003;flex-shrink:0}
+.avatar.avatar-portrait{width:48px;height:48px}
+.avatar svg,.board-avatar svg,.score-portrait svg{display:block;width:100%;height:100%}
+.avatar.avatar-placeholder{display:grid;place-items:center;border-style:dashed}
+.score-player{display:flex;gap:7px;align-items:center}
+.score-portrait{width:25px;height:25px;border-width:1px}
+.score-player .score-name{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.score-player .score-index{margin-right:0;flex-shrink:0}
+.felt-board{background:radial-gradient(ellipse at 50% 42%,#347868 0%,#23644f 36%,#0d423c 83%);border:10px solid #4b3227;outline:3px solid #bd9660;box-shadow:0 24px 65px #0007,inset 0 0 0 4px #dfc09070,inset 0 0 120px #001f193f;border-radius:120px;min-height:535px;isolation:isolate}
+.felt-pattern{opacity:.09}
+.felt-board:before{content:'';position:absolute;inset:25px;border:2px solid #acddae45;border-radius:99px;pointer-events:none}
+.felt-board:after{content:'TRIX  •  BELOTE';font:900 12px Outfit,Arial,sans-serif;letter-spacing:.6em;color:#daf2d20b;position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;z-index:-1}
+.board-topline{z-index:2}
+.board-players{max-width:none;min-height:440px;grid-template-columns:minmax(130px,1fr) minmax(280px,490px) minmax(130px,1fr);grid-template-rows:115px minmax(255px,1fr) 100px}
+.board-seat{min-width:0;max-width:180px;background:#143f37bc;border:1px solid #a9cfa05c;padding:9px 11px;border-radius:17px;box-shadow:0 8px 20px #002a2569;gap:4px}
+.board-seat.active-seat{border:2px solid #e8f2a9;box-shadow:0 0 0 4px #eaf19f21,0 0 24px #e7ef9450}
+.board-avatar{width:43px;height:43px;border-width:2px}
+.board-seat small{font-size:12px;font-weight:900;color:#eff5e6;text-align:center;max-width:135px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.board-seat .seat-subline{font-size:10px;color:#b4d7bf;white-space:nowrap}
+.board-seat .seat-subline strong{color:#e1edb9}
+.mini-deck{display:flex;justify-content:center;padding-left:8px;height:17px}
+.mini-deck i{display:block;width:13px;height:16px;margin-left:-6px;border:1px solid #d6ebd5;border-radius:3px;background:repeating-linear-gradient(45deg,#6ea18e 0 2px,#24493f 2px 4px)}
+.table-cards{position:relative;max-width:300px;margin:auto;min-height:270px;gap:10px 15px;z-index:1}
+.table-card-wrap{filter:drop-shadow(0 5px 8px #012a24a3)}
+.table-card-wrap.moving{animation:cardDrop .39s cubic-bezier(.2,.9,.3,1.15) both}
+.table-cards .table-placeholder{border:2px dashed #eaf2da55;background:#103f3445;padding:21px 28px;border-radius:17px}
+.table-cards .table-placeholder span{font-size:25px;letter-spacing:.2em;color:#c4e4cf}
+.table-cards .table-placeholder small{font-size:11px;color:#c2dfce}
+.table-card-wrap .playing-card{width:79px;height:108px;box-shadow:4px 8px 17px #071c1999}
+.table-card-wrap .playing-card .card-suit{font-size:44px}
+.board-center-banner{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:15px;background:#eaf1d8;color:#1a4934;box-shadow:0 5px 24px #0006;min-width:170px;max-width:min(84%,360px);padding:13px 19px;text-align:center;z-index:8;pointer-events:none;animation:popReveal 1.55s ease both}
+.board-center-banner strong{font:900 20px Outfit,Arial,sans-serif;display:block}
+.board-center-banner span{font-size:11px;font-weight:800}
+.board-center-banner.card-cue{background:#f7f9e6}
+.board-center-banner.trick-cue{background:#e4e9a5}
+.board-center-banner.ace-cue{background:#f6d7a7}
+.board-center-banner.fin-cue{background:#ebd3a5}
+.played-spark{position:absolute;right:22px;bottom:18px;color:#d0f3d4;font-weight:800;font-size:10px;letter-spacing:.07em;opacity:.8}
+.board-trix .trix-piles{position:relative;z-index:1;background:#05352b35;border-radius:18px;padding:16px 17px;margin:14px auto;max-width:840px}
+.board-trix{min-height:480px}
+.trix-player-rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;position:relative;z-index:1;margin:18px auto 4px;max-width:770px}
+.trix-player-box{border:1px solid #afceb672;background:#103d33ae;border-radius:13px;padding:8px;display:flex;align-items:center;gap:7px;min-width:0}
+.trix-player-box.is-turn{border-color:#e5ec99;box-shadow:0 0 0 2px #e8e9a82a}
+.trix-player-box .score-portrait{width:34px;height:34px}
+.trix-player-box .rail-name{font-size:11px;font-weight:800;color:#f0f3e8;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.trix-player-box .rail-count{font-size:10px;color:#bcd3bd}
+.trix-slot.just-placed{animation:cardDrop .42s ease both;box-shadow:0 0 15px #ddfca69c}
+.last-result{position:relative;z-index:1}
+.game-action-log{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;color:#e0f5df;position:relative;z-index:1;margin:6px auto 0;justify-content:center}
+.action-pip{display:inline-block;width:8px;height:8px;background:#e9e8a2;border-radius:50%;box-shadow:0 0 8px #dbee8f}
+.activity-items>span:first-child{animation:slideEntry .4s ease both;background:#254a3f;border:1px solid #629d75;border-radius:6px;padding:6px 9px}
+.playing-card:not(:disabled){transition:transform .16s ease,box-shadow .16s ease}
+.playing-card:not(:disabled):hover{transform:translateY(-9px) rotate(-1deg);box-shadow:0 15px 30px #0005}
+.playing-card:not(:disabled):active{transform:translateY(-2px) scale(.95)}
+.result-header .result-glyph{animation:popReveal .8s ease both}
+.result-row{animation:slideEntry .4s ease both}
+.result-row:nth-child(2){animation-delay:.08s}.result-row:nth-child(3){animation-delay:.15s}.result-row:nth-child(4){animation-delay:.22s}
+.rules-note.audio-note{background:#1e3c34}
+@keyframes cardDrop{from{opacity:.2;transform:translateY(-45px) scale(1.18) rotate(-8deg)}to{opacity:1;transform:translateY(0) scale(1) rotate(0)}}
+@keyframes popReveal{0%{opacity:0;transform:translate(-50%,-50%) scale(.75)}16%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}65%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(.98)}}
+@keyframes slideEntry{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:800px){
+ .felt-board{border-radius:57px;min-height:455px;border-width:7px;padding:13px 8px}
+ .board-players{grid-template-columns:85px minmax(0,1fr) 85px;grid-template-rows:105px minmax(210px,1fr) 90px;min-height:418px}
+ .board-seat{padding:7px 5px;max-width:95px;border-radius:12px}
+ .board-seat small{font-size:10px;max-width:81px}
+ .board-avatar{width:38px;height:38px}
+ .table-cards{grid-template-columns:repeat(2,minmax(62px,78px));min-height:225px;gap:6px}
+ .table-card-wrap .playing-card{width:61px;height:83px}
+ .table-card-wrap .playing-card .card-suit{font-size:30px}
+ .table-card-wrap .table-player-label{max-width:75px;font-size:9px}
+ .trix-player-box{padding:5px 3px;gap:4px;flex-direction:column;text-align:center}
+ .trix-player-box .score-portrait{width:27px;height:27px}
+ .trix-player-box .rail-name{font-size:9px}
+ .trix-player-box .rail-count{font-size:9px}
+ .trix-suit-row{gap:3px}
+ .board-trix .trix-piles{padding:13px 3px}
+ .board-trix{min-height:410px}
+ .trix-slot{height:49px}
+}
+@media(max-width:470px){
+ .header{gap:8px;flex-wrap:wrap}
+ .header-right{width:100%;justify-content:space-between;flex-wrap:nowrap}
+ .header .chip-online{max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .header .icon-btn{padding:7px 6px}
+ .board-players{grid-template-columns:53px minmax(0,1fr) 53px;min-height:365px;grid-template-rows:91px 190px 78px}
+ .board-seat{width:70px;max-width:70px;padding:5px 2px;overflow:visible}
+ .bseat-1{transform:translateX(3px)}.bseat-2{transform:translateX(-3px)}
+ .board-avatar{width:31px;height:31px}
+ .board-seat small{font-size:8px;max-width:65px}
+ .board-seat .seat-subline{font-size:8px}
+ .mini-deck{display:none}
+ .table-cards{grid-template-columns:repeat(2, minmax(55px,61px));gap:4px;min-height:195px}
+ .table-card-wrap .playing-card{width:49px;height:67px}
+ .table-card-wrap .playing-card .card-suit{font-size:24px}
+ .table-card-wrap .table-suit-label{font-size:7px;padding:2px 3px}
+ .table-card-wrap .table-player-label{font-size:8px;max-width:57px}
+ .board-center-banner{padding:9px 12px;min-width:128px}
+ .board-center-banner strong{font-size:15px}
+ .score-portrait{width:20px;height:20px}
+ .score-player{gap:3px}
+ .score-index{display:none}
+ .score-player .score-name{font-size:9px}
+ .avatar-choice{width:42px;height:42px}
+ .board-trix .trix-piles{padding:12px 2px}
+ .trix-slot{height:43px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+.landing-audio{display:flex;gap:9px;align-items:center;margin-top:15px;flex-wrap:wrap}.landing-audio .audio-button{background:#1e3838}.landing-audio span{font-size:10px;color:#86a29a}.quick-start{margin-bottom:14px;background:#244a41;color:#d5ebc7;border-color:#9dbe95;font-weight:900}
+
+/* V10 — mode partie compact : score, table et main dans un même écran. */
+body:has(.playing-page) .header {padding-top:9px;padding-bottom:9px;min-height:48px}
+body:has(.playing-page) .header .logo-mark {font-size:25px}
+body:has(.playing-page) .header .icon-btn {padding:7px 10px}
+body:has(.playing-page) .header .chip-online {font-size:10px}
+.playing-page {padding-top:11px;padding-bottom:18px}
+.playing-page .match-top.tight {margin-bottom:8px;align-items:center}
+.playing-page .match-top.tight h1 {font-size:clamp(23px,2.5vw,31px);margin:1px 0 0;line-height:1.05}
+.playing-page .match-top .section-kicker {font-size:9px;letter-spacing:.12em}
+.playing-page .match-top p {font-size:10px;line-height:1.2;max-width:800px;margin-top:3px}
+.playing-page .score-tip {display:none}
+.playing-page .score-grid {gap:7px;margin-bottom:10px}
+.playing-page .score-tile {padding:5px 9px;border-radius:8px}
+.playing-page .score-portrait {width:21px;height:21px}
+.playing-page .score-player {gap:6px;font-size:11px}
+.playing-page .score-num {font-size:21px;line-height:1.05;margin:4px 0 0}
+.playing-page .score-round {font-size:9px}
+.playing-page .felt-board {padding:9px 16px;border-width:7px;border-radius:60px;min-height:0}
+.playing-page .felt-board:before {inset:14px;border-radius:45px}
+.playing-page .board-topline {margin-bottom:0;min-height:25px}
+.playing-page .board-players {grid-template-rows:65px 190px 64px;min-height:319px;max-width:none}
+.playing-page .board-seat {padding:4px 7px;gap:2px;max-width:156px;border-radius:12px}
+.playing-page .board-avatar {width:31px;height:31px}
+.playing-page .board-seat small {font-size:10px}
+.playing-page .board-seat .seat-subline {font-size:9px}
+.playing-page .mini-deck {display:none}
+.playing-page .table-cards {grid-template-columns:repeat(2, minmax(60px,78px));gap:4px 10px;min-height:174px}
+.playing-page .table-card-wrap {gap:2px}
+.playing-page .table-card-wrap .playing-card {width:57px;height:77px}
+.playing-page .table-card-wrap .playing-card .card-suit {font-size:29px}
+.playing-page .table-card-wrap .table-suit-label {font-size:9px;padding:2px}
+.playing-page .table-card-wrap .table-player-label {font-size:9px}
+.playing-page .game-action-log {font-size:10px;margin-top:2px;min-height:13px}
+.playing-page .last-result {font-size:10px;margin-top:1px}
+.playing-page .hand-area {margin-top:10px;padding:9px 12px 8px}
+.playing-page .hand-header {margin-bottom:6px}
+.playing-page .hand-header .section-kicker {font-size:9px}
+.playing-page .hand-header h2 {font-size:17px;margin:1px 0 0}
+.playing-page .hand-cards {flex-wrap:nowrap;gap:5px;min-height:0}
+.playing-page .hand-cards .playing-card {width:clamp(41px,5.8vw,61px);height:clamp(68px,8.3vw,83px);flex:none}
+.playing-page .hand-cards .playing-card .card-suit {font-size:26px}
+.playing-page .hand-hint {font-size:9px;line-height:1.22;margin:5px 0 0}
+.playing-page .history-strip {margin-top:6px;display:flex;gap:9px;align-items:center;overflow:hidden;min-height:19px}
+.playing-page .history-strip h3 {font-size:10px;margin:0;flex:none}
+.playing-page .activity-items {display:flex;flex-wrap:nowrap;white-space:nowrap;overflow:hidden;gap:6px;min-width:0}
+.playing-page .activity-items span {padding:3px 5px;font-size:9px;flex:none}
+.playing-page .board-trix {min-height:0}
+.playing-page .trix-player-rail {margin:3px auto 0}
+.playing-page .board-trix .trix-piles {margin:4px auto;padding:7px 12px}
+.playing-page .trix-suit-row {gap:5px}
+.playing-page .trix-slot {height:32px}
+.playing-page .trix-finish {padding-bottom:3px;font-size:10px}
+@media(max-width:800px){
+ body:has(.playing-page) .header {padding:7px 12px}
+ .playing-page {padding:7px 11px 11px}
+ .playing-page .match-top.tight {margin-bottom:6px}
+ .playing-page .match-top.tight h1 {font-size:26px}
+ .playing-page .match-top p {font-size:9px}
+ .playing-page .score-grid {gap:4px;margin-bottom:7px}
+ .playing-page .score-tile {padding:5px 5px}
+ .playing-page .score-player {gap:3px}
+ .playing-page .score-num {font-size:18px}
+ .playing-page .score-round {font-size:8px}
+ .playing-page .felt-board {border-radius:38px;border-width:5px;padding:6px 9px}
+ .playing-page .felt-board:before {inset:10px;border-radius:29px}
+ .playing-page .board-topline {min-height:22px}
+ .playing-page .board-players {grid-template-columns:69px minmax(0,1fr) 69px;grid-template-rows:56px 166px 55px;min-height:277px}
+ .playing-page .board-seat {width:76px;max-width:76px;padding:3px 2px}
+ .playing-page .board-seat small {font-size:9px;max-width:75px}
+ .playing-page .board-seat .seat-subline {font-size:8px}
+ .playing-page .board-avatar {width:26px;height:26px}
+ .playing-page .table-cards {grid-template-columns:repeat(2,minmax(50px,58px));min-height:154px;gap:4px}
+ .playing-page .table-card-wrap .playing-card {width:46px;height:61px}
+ .playing-page .table-card-wrap .playing-card .card-suit {font-size:25px}
+ .playing-page .table-card-wrap .table-suit-label {font-size:7px}
+ .playing-page .table-card-wrap .table-player-label {font-size:8px}
+ .playing-page .hand-area {margin-top:7px;padding:7px 7px 6px}
+ .playing-page .hand-cards {gap:3px}
+ .playing-page .hand-cards .playing-card {width:clamp(31px,10vw,48px);height:70px}
+ .playing-page .hand-cards .playing-card .card-suit {font-size:23px}
+ .playing-page .hand-hint {font-size:9px}
+ .playing-page .trix-player-rail {margin:4px auto 2px;gap:4px}
+ .playing-page .trix-player-box {padding:3px}
+ .playing-page .board-trix .trix-piles {padding:5px;margin:5px auto}
+ .playing-page .trix-slot {height:30px}
+}
+@media(max-width:470px){
+ body:has(.playing-page) .header {flex-wrap:nowrap;gap:5px}
+ body:has(.playing-page) .header .logo-mark {font-size:20px}
+ body:has(.playing-page) .header-right {width:auto;gap:4px;justify-content:flex-end;flex-wrap:wrap}
+ body:has(.playing-page) .header .icon-btn {padding:5px 6px;font-size:9px}
+ body:has(.playing-page) .header .chip-online {font-size:9px;max-width:90px}
+ .playing-page {padding:6px 9px 10px}
+ .playing-page .match-top.tight h1 {font-size:24px}
+ .playing-page .match-top p {font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:95vw}
+ .playing-page .score-tile {padding:4px 4px}
+ .playing-page .score-portrait {width:17px;height:17px}
+ .playing-page .score-player .score-name {font-size:8px}
+ .playing-page .score-num {font-size:17px;margin-top:2px}
+ .playing-page .score-round {font-size:8px}
+ .playing-page .felt-board {padding:6px 7px;border-radius:32px;border-width:4px}
+ .playing-page .felt-board:before {inset:8px;border-radius:26px}
+ .playing-page .board-players {grid-template-columns:54px minmax(0,1fr) 54px;grid-template-rows:49px 153px 49px;min-height:251px}
+ .playing-page .board-seat {width:66px;max-width:66px;padding:2px;gap:0;border-radius:9px}
+ .playing-page .board-seat small {font-size:8px;max-width:63px}
+ .playing-page .board-seat .seat-subline {font-size:7px}
+ .playing-page .board-avatar {width:25px;height:25px}
+ .playing-page .table-cards {grid-template-columns:repeat(2,minmax(45px,55px));min-height:144px;gap:2px}
+ .playing-page .table-card-wrap .playing-card {width:45px;height:60px}
+ .playing-page .table-card-wrap .playing-card .card-suit {font-size:22px}
+ .playing-page .table-card-wrap .table-player-label {font-size:7px}
+ .playing-page .table-card-wrap .table-suit-label {font-size:7px}
+ .playing-page .board-center-banner {min-width:120px;padding:7px 9px}
+ .playing-page .board-center-banner strong {font-size:14px}
+ .playing-page .hand-cards .playing-card {width:clamp(31px,9.75vw,38px);height:66px}
+ .playing-page .hand-cards .playing-card .card-suit {font-size:22px}
+ .playing-page .history-strip {margin-top:5px}
+ .playing-page .history-strip h3 {font-size:9px}
+ .playing-page .activity-items span {font-size:8px}
+ .playing-page .trix-slot {height:29px}
+ .playing-page .trix-player-box .score-portrait {width:22px;height:22px}
+ .playing-page .trix-player-box .rail-count {font-size:8px}
+}
+.queen-scoring-note{font-size:12px;color:#e0e8cc;margin:0 0 15px;line-height:1.45}.board-center-banner{display:none!important}
+/* TRIX V13 · Messages liés aux avatars, sans recouvrir les cartes. */
+[data-chat-seat]{position:relative}
+.player-chat-bubble{
+ position:absolute;z-index:18;left:50%;top:calc(100% + 5px);
+ transform:translateX(-50%);max-width:190px;width:max-content;min-width:58px;
+ padding:8px 11px;border-radius:13px;background:#fffdf4;color:#1b3932;
+ border:1px solid #add3bd;box-shadow:0 7px 22px #001a1770;
+ font:600 11px/1.35 'DM Sans',Arial,sans-serif;text-align:left;
+ overflow-wrap:anywhere;pointer-events:none;
+ display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;
+ animation:chatSeatPop .22s ease-out both;
+}
+.player-chat-bubble:before{
+ content:'';position:absolute;width:9px;height:9px;background:#fffdf4;
+ top:-5px;left:calc(50% - 5px);transform:rotate(45deg);
+ border-left:1px solid #add3bd;border-top:1px solid #add3bd;
+}
+@keyframes chatSeatPop{from{opacity:0;transform:translate(-50%,5px) scale(.93)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
+.board-seat.bseat-0>.player-chat-bubble{top:calc(100% + 5px)}
+.board-seat.bseat-1>.player-chat-bubble{top:calc(100% + 5px);left:0;transform:none;animation:none}
+.board-seat.bseat-2>.player-chat-bubble{top:calc(100% + 5px);left:auto;right:0;transform:none;animation:none}
+.board-seat.bseat-3>.player-chat-bubble{top:auto;bottom:calc(100% + 5px)}
+.board-seat.bseat-3>.player-chat-bubble:before{top:auto;bottom:-5px;transform:rotate(225deg)}
+.trix-player-box>.player-chat-bubble{top:calc(100% + 7px)}
+.lobby-seat>.player-chat-bubble{left:72px;top:calc(100% - 15px);transform:none;animation:none}
+.score-tile>.player-chat-bubble{left:50%;top:calc(100% + 3px)}
+.playing-page .score-tile>.player-chat-bubble{display:none}
+/* La discussion reste sous la table et possède sa propre zone de défilement. */
+#social-root{width:min(100%,1100px);margin:0 auto 20px;padding:0 22px;
+ color:#f2f4ec;font-family:'DM Sans',Arial,sans-serif;position:relative;z-index:4}
+.social-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+ background:#142c2a;border:1px solid #416d5e;border-radius:12px;padding:8px 10px}
+.social-tool{background:#24443d;color:#e6f3e9;border:1px solid #41695c;
+ border-radius:8px;padding:9px 12px;min-height:35px;font-size:12px;font-weight:800}
+.social-tool:hover,.social-tool.is-active{background:#446e57;color:#fff}
+.social-tool.is-muted{background:#4a3838}
+.chat-unread{display:inline-grid;place-items:center;background:#d9e69e;color:#1e382a;
+ border-radius:15px;padding:1px 6px;font-size:10px;margin-left:3px}
+.chat-panel{background:#172e2d;border:1px solid #416d5e;border-top:0;
+ border-radius:0 0 12px 12px;max-width:100%;overflow:hidden}
+.chat-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;
+ padding:9px 14px;border-bottom:1px solid #47685d}
+.chat-panel-head strong{font-size:12px}
+.chat-panel-head small{display:block;font-size:10px;color:#acc8b5;margin-top:2px}
+.chat-panel-head button{background:transparent;color:#fff;border:0;font-size:22px;min-width:32px}
+.chat-messages{height:160px;max-height:160px;min-height:80px;overflow-y:auto;
+ overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;
+ scrollbar-color:#86ae99 #18382e;padding:10px 13px;display:flex;flex-direction:column;gap:7px}
+.chat-message{border-radius:9px;padding:7px 10px;background:#25483e;max-width:86%;align-self:flex-start;overflow-wrap:anywhere}
+.chat-message.mine{align-self:flex-end;background:#3f6348}
+.chat-message>div{display:flex;align-items:baseline;gap:10px;justify-content:space-between;font-size:10px}
+.chat-message b{color:#eaf2cf}
+.chat-message time{color:#b3c8b6;font-size:9px}
+.chat-message p{font-size:12px;line-height:1.4;margin:3px 0 0;color:#fff}
+.chat-empty{color:#afc4b9;font-size:12px;text-align:center;margin:auto}
+.chat-form{display:flex;gap:7px;padding:9px 11px;border-top:1px solid #416558}
+.chat-form input{min-width:0;flex:1;background:#0d2323;border:1px solid #527564;
+ border-radius:8px;color:#fff;font-size:12px;padding:10px;outline:none}
+.chat-form button{background:#b9d79f;border:0;border-radius:8px;color:#17372e;
+ font-weight:800;padding:9px 15px;font-size:12px}
+.voice-hint{padding:0 12px 8px;font-size:9px;color:#95ab9c}
+body:has(.playing-page) #app{min-height:0}
+body:has(.playing-page) .game-main{padding-bottom:8px}
+body:has(.playing-page) #social-root{margin-top:4px}
+@media(max-width:700px){
+ #social-root{padding:0 9px;margin-bottom:12px}
+ .chat-messages{height:144px;max-height:144px}
+ .player-chat-bubble{max-width:108px;min-width:45px;font-size:9px;line-height:1.2;padding:6px 7px;-webkit-line-clamp:2}
+ .board-seat.bseat-0>.player-chat-bubble{top:calc(100% + 3px)}
+ .board-seat.bseat-1>.player-chat-bubble{left:0;top:calc(100% + 3px)}
+ .board-seat.bseat-2>.player-chat-bubble{right:0;top:calc(100% + 3px)}
+ .board-seat.bseat-3>.player-chat-bubble{bottom:calc(100% + 3px)}
+ .trix-player-box>.player-chat-bubble{max-width:105px}
+ .social-tool{padding:8px 9px;font-size:11px}
+ .chat-panel-head small{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){.player-chat-bubble{animation:none}}
+
+
+/* Minimal return link, isolated from game logic. */
+.hub-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;letter-spacing:.02em;color:#bce5d3;text-decoration:none;padding:9px 13px;border:1px solid #51746e;border-radius:30px;background:#1d3636;white-space:nowrap}.hub-link:hover{background:#315147}.hub-link:focus-visible{outline:2px solid #d6e49e;outline-offset:3px}@media(max-width:600px){.hub-link{padding:7px 9px;font-size:10px}}
+</style>
+  <script src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js" defer></script>
+
+</head>
+<body>
+  <div id="app"><div class="boot">Ouverture de la table…</div></div>
+  <div id="social-root"></div>
+  <script>
+const {CONTRACTS,CONTRACT_LABELS,SUITS,RANKS,TRICK_RANKS,SUIT_GLYPHS,SUIT_LABELS,initialGame,beginGame,availableContracts,legalTrickCards,legalTrixCards,startContract,playCard,settleTrick,startNextRound,publicState} = (()=>{
+// Moteur de jeu déterministe. Seul l'hôte applique les actions.
+const SUITS = ["S", "H", "D", "C"];
+const RANKS = ["7", "8", "9", "10", "J", "Q", "K", "A"]; // Suites du Trix : ordre naturel
+const TRICK_RANKS = ["7", "8", "9", "J", "Q", "K", "10", "A"]; // Plis : 10 > K, As > 10
+const trickPower = card => TRICK_RANKS.indexOf(card.slice(1));
+const CONTRACTS = ["king", "queens", "hearts", "tricks", "last", "general", "trix"];
+const CONTRACT_LABELS = {
+  king: "Roi de cœur",
+  queens: "Dames",
+  hearts: "Cœurs",
+  tricks: "Plis",
+  last: "Dernier pli",
+  general: "Générale",
+  trix: "Trix",
+};
+const SUIT_GLYPHS = {S:"♠", H:"♥", D:"♦", C:"♣"};
+const SUIT_LABELS = {S:"Pique", H:"Cœur", D:"Carreau", C:"Trèfle"};
+const playerName = (index) => `Joueur ${index + 1}`;
+
+function deck32() {return SUITS.flatMap(suit => RANKS.map(rank => suit + rank));}
+function shuffle(deck, rng=Math.random) {
+  const out = [...deck];
+  for (let i=out.length-1;i>0;i--) {const j = Math.floor(rng()*(i+1)); [out[i],out[j]]=[out[j],out[i]];}
+  return out;
+}
+function sortHand(cards, isTrix=false) {
+  const ranks=isTrix?RANKS:TRICK_RANKS;
+  return [...cards].sort((a,b) => SUITS.indexOf(a[0])-SUITS.indexOf(b[0]) || ranks.indexOf(a.slice(1))-ranks.indexOf(b.slice(1)));
+}
+function initialGame(hostName="Hôte", mode="quick", token="host") {
+  return {
+    version:1, mode, phase:"lobby", roundNumber:0, contract:null, current:0, owner:0,
+    seats:[{name:hostName||"Hôte", token, connected:true,bot:false}, null, null, null],
+    scores:[0,0,0,0], hands:[[],[],[],[]], trick:[], lastTrick:[], heartsBroken:false,
+    piles:{S:[],H:[],D:[],C:[]}, finishes:[], roundScores:[0,0,0,0],
+    events:[], history:[], trickLog:[], locked:false, roundSummary:null,
+    usedQuick:[], usedByOwner:[[],[],[],[]]
+  };
+}
+function availableContracts(g) {
+  return CONTRACTS.filter(c => !(g.mode==="quick" ? g.usedQuick : g.usedByOwner[g.owner]).includes(c));
+}
+function legalTrickCards(hand, trick, contract=null, heartsBroken=false) {
+  if (!trick.length) {
+    // Variante Dame de pique : interdiction d'entamer un pli à cœur
+    // avant la première défausse de cœur, sauf main composée uniquement de cœurs.
+    if (['king','hearts','general'].includes(contract) && !heartsBroken) {
+      const otherSuits = hand.filter(card => card[0] !== 'H');
+      if (otherSuits.length) return otherSuits;
+    }
+    return [...hand];
+  }
+  // En cours de pli, fournir la couleur reste prioritaire ; si elle manque,
+  // une défausse de cœur est légale et libère les cœurs pour la suite.
+  const suit = trick[0].card[0];
+  const follow = hand.filter(c=>c[0]===suit);
+  return follow.length ? follow : [...hand];
+}
+function legalTrixCards(hand, piles) {
+  return hand.filter(card => {
+    const [suit] = card;
+    const rank = card.slice(1);
+    if (rank === "J") return !piles[suit].includes("J");
+    if (!piles[suit].includes("J")) return false;
+    const idx=RANKS.indexOf(rank);
+    return piles[suit].some(r=>Math.abs(RANKS.indexOf(r)-idx)===1);
+  });
+}
+function trickWinner(trick) {
+  if (trick.length!==4) throw new Error("Le pli doit contenir quatre cartes.");
+  const suit = trick[0].card[0];
+  return trick.filter(t=>t.card[0]===suit).reduce((best, t) => trickPower(t.card)>trickPower(best.card) ? t : best).seat;
+}
+function pointsForTrick(contract, cards, isLast) {
+  const hasKing = cards.includes("HK");
+  const queens = cards.filter(c=>c.slice(1)==="Q").length;
+  const hearts = cards.filter(c=>c[0]==="H").length;
+  let pts=0;
+  if (["king","general"].includes(contract) && hasKing) pts+=80;
+  if (["queens","general"].includes(contract)) pts+=queens*30;
+  if (["hearts","general"].includes(contract)) pts+=hearts*10;
+  if (["tricks","general"].includes(contract)) pts+=10;
+  if (isLast) pts+=40; // Dernier pli : +40 dans TOUS les contrats sauf Trix.
+  return {points:pts,hasKing,queens,hearts,isLast};
+}
+{ pointsForTrick };
+function addEvent(g, item){g.events.unshift(item);g.events=g.events.slice(0,12);}
+function recordAction(g,item){g.actionSeq=(g.actionSeq||0)+1;g.lastAction={...item,seq:g.actionSeq};}
+function assert(cond,message){if(!cond)throw new Error(message);}
+function nextTrixTurn(g, afterSeat) {
+  for(let step=1;step<=4;step++) {
+    const seat=(afterSeat+step)%4;
+    if(g.hands[seat].length && legalTrixCards(g.hands[seat],g.piles).length) return seat;
+  }
+  return -1;
+}
+function completeRound(g) {
+  // Le récapitulatif final conserve les plis joués (8 maximum), l'ordre de pose, la carte de chacun,
+  // le vainqueur et le calcul exact des points (chef ×2 inclus).
+  const summary={
+    contract:g.contract, contractLabel:CONTRACT_LABELS[g.contract],owner:g.owner,
+    scores:[...g.roundScores],events:[...g.events],
+    tricks:(g.trickLog||[]).map(t=>({...t,plays:t.plays.map(p=>({...p})),details:{...t.details}})),
+    finishes:[...g.finishes],
+    earlyStop:g.contract==='king' && g.trickLog.some(t=>t.plays.some(p=>p.card==='HK')) && g.trickLog.length<8
+  };
+  g.history.push(summary);
+  g.roundSummary=summary;
+  g.phase="roundEnd";g.locked=false;
+  g.hands=[[],[],[],[]];
+  addEvent(g,{message:"Manche terminée",points:0});
+}
+function dealHands(g, rng=Math.random) {
+  // Distribuer AVANT de choisir le contrat : chaque joueur voit sa propre main.
+  const deck=shuffle(deck32(),rng);
+  g.hands=[0,1,2,3].map(i=>sortHand(deck.slice(i*8,(i+1)*8)));
+}
+function startContract(g, contract) {
+  assert(g.phase==="select","Impossible de choisir un contrat maintenant.");
+  assert(availableContracts(g).includes(contract),"Contrat indisponible.");
+  assert(g.hands.length===4 && g.hands.every(h=>h.length===8),"Les cartes doivent être distribuées avant le choix.");
+  // IMPORTANT : ne pas redistribuer ici. Les mains vues restent les mêmes.
+  g.contract=contract;g.phase="play";g.locked=false;g.trick=[];g.lastTrick=[];
+  recordAction(g,{type:'contract',seat:g.owner,contract,text:`${g.seats[g.owner].name} choisit ${CONTRACT_LABELS[contract]}`});
+  g.piles={S:[],H:[],D:[],C:[]};g.finishes=[];g.heartsBroken=false;
+  g.current=g.owner;g.roundScores=[0,0,0,0];g.events=[];g.trickLog=[];g.roundSummary=null;
+  if(g.mode==="quick")g.usedQuick.push(contract);else g.usedByOwner[g.owner].push(contract);
+  if(contract==="trix")g.current=nextTrixTurn(g,(g.owner+3)%4);
+  return g;
+}
+function playCard(g,seat,card){
+  assert(g.phase==="play"&&!g.locked,"La manche n'est pas disponible.");
+  assert(seat===g.current,"Ce n'est pas ton tour.");
+  assert(g.hands[seat].includes(card),"Cette carte n'est pas dans ta main.");
+  if(g.contract==="trix"){
+    assert(legalTrixCards(g.hands[seat],g.piles).includes(card),"Cette carte ne peut pas encore être posée.");
+    g.hands[seat].splice(g.hands[seat].indexOf(card),1);
+    g.piles[card[0]].push(card.slice(1));
+    recordAction(g,{type:card.slice(1)==='A'?'ace':'card',seat,card,text:`${g.seats[seat].name} pose ${SUIT_GLYPHS[card[0]]}${card.slice(1)}`});
+    addEvent(g,{message:`${g.seats[seat].name} a posé ${SUIT_GLYPHS[card[0]]}${card.slice(1)}`,seat,points:0});
+    if(g.hands[seat].length===0){
+      const position=g.finishes.length+1;
+      g.finishes.push(seat);
+      const baseScore=position===1?-100:position===2?-50:0;
+      const score=baseScore*(seat===g.owner?2:1); // Le chef double aussi ses points négatifs au Trix.
+      g.roundScores[seat]+=score;g.scores[seat]+=score;
+      addEvent(g,{message:`${g.seats[seat].name} termine ${position}${position===1?"er":"e"}`,seat,points:score});
+    }
+    if(g.finishes.length===4){completeRound(g);return g;}
+    // Dans le contrat Trix, poser un As donne immédiatement un nouveau tour.
+    // Si le joueur n'a plus de carte jouable, le tour passe normalement.
+    const bonusAs = card.slice(1)==='A' && g.hands[seat].length>0 && legalTrixCards(g.hands[seat],g.piles).length>0;
+    g.current=bonusAs?seat:nextTrixTurn(g,seat);
+    if(bonusAs)addEvent(g,{message:`${g.seats[seat].name} a posé un As et rejoue`,seat,points:0});
+    assert(g.current!==-1,"Aucun coup possible.");
+    return g;
+  }
+  assert(legalTrickCards(g.hands[seat],g.trick,g.contract,g.heartsBroken).includes(card),
+    "Carte non autorisée : fournissez la couleur ; les cœurs sont bloqués à l'entame jusqu'à une défausse (sauf main entièrement cœur).");
+  g.hands[seat].splice(g.hands[seat].indexOf(card),1);
+  // Une couleur cœur n'est libérée qu'à une défausse de cœur sur une autre
+  // couleur, ou lorsque la seule option légale était d'entamer à cœur.
+  if(card[0]==='H' && (!g.trick.length || g.trick[0].card[0]!=='H'))g.heartsBroken=true;
+  g.trick.push({seat,card});
+  recordAction(g,{type:'card',seat,card,text:`${g.seats[seat].name} joue ${SUIT_GLYPHS[card[0]]}${card.slice(1)}`});
+  addEvent(g,{message:`${g.seats[seat].name} joue ${SUIT_GLYPHS[card[0]]}${card.slice(1)}`,seat,points:0});
+  if(g.trick.length===4){g.locked=true;}
+  else g.current=(seat+1)%4;
+  return g;
+}
+function settleTrick(g){
+  assert(g.phase==="play" && g.contract!=="trix" && g.trick.length===4,"Aucun pli à terminer.");
+  const winner=trickWinner(g.trick);
+  const cards=g.trick.map(t=>t.card);
+  // Dès que le Roi de cœur apparaît dans un pli complet, le contrat s’arrête.
+  // Le pli qui capture le Roi devient le dernier pli EFFECTIVEMENT joué (+40 pts).
+  const kingCaptured=g.contract==='king' && cards.includes('HK');
+  const isLast=kingCaptured || g.hands.every(hand=>hand.length===0);
+  const breakdown=pointsForTrick(g.contract,cards,isLast);
+  const scoredPoints=breakdown.points*(winner===g.owner?2:1); // Le chef est ×2 uniquement sur SES pénalités.
+  g.scores[winner]+=scoredPoints;g.roundScores[winner]+=scoredPoints;
+  g.lastTrick={winner,cards:[...g.trick],points:scoredPoints,basePoints:breakdown.points,isLast};
+  // Afficher les Dames à +30 chacune ; les +40 du dernier pli sont un BONUS DISTINCT.
+  const queenParts = [];
+  if(g.contract==='queens'){
+    if(breakdown.queens)queenParts.push(`${breakdown.queens} Dame${breakdown.queens>1?'s':''} : +${breakdown.queens*30}`);
+    if(isLast)queenParts.push('dernier pli : +40');
+  }
+  const trickAnnouncement = g.contract==='queens' && queenParts.length
+    ? `${g.seats[winner].name} · ${queenParts.join(' · ')} · total +${scoredPoints}${winner===g.owner?' (chef ×2)':''} pts`
+    : scoredPoints>0
+      ? `${g.seats[winner].name} prend le pli${isLast?' final':''} · +${scoredPoints} pts de pénalité`
+      : `${g.seats[winner].name} remporte le pli${isLast?' final':''} sans pénalité`;
+  recordAction(g,{type:'trick',seat:winner,points:scoredPoints,text:trickAnnouncement});
+  g.trickLog??=[];
+  g.trickLog.push({
+    number:g.trickLog.length+1,
+    plays:g.trick.map(({seat,card})=>({seat,card})),
+    winner,points:scoredPoints,basePoints:breakdown.points,
+    doubled:winner===g.owner,details:{...breakdown},isLast
+  });
+  addEvent(g,{message:`${g.seats[winner].name} remporte le pli${isLast?" (dernier pli)":""}${winner===g.owner?" · Chef ×2":""}`,seat:winner,points:scoredPoints});
+  g.trick=[];g.locked=false;g.current=winner;
+  if(isLast){
+    if(kingCaptured){
+      addEvent(g,{message:`Roi de cœur capturé : fin immédiate de la manche`,seat:winner,points:0});
+      recordAction(g,{type:'trick',seat:winner,points:scoredPoints,
+        text:`${g.seats[winner].name} capture le Roi de cœur · +${scoredPoints} pts · Manche terminée`});
+    }
+    completeRound(g);
+  }
+  return g;
+}
+function startNextRound(g, rng=Math.random){
+  assert(g.phase==="roundEnd","La manche n'est pas terminée.");
+  g.roundNumber++;
+  const max=g.mode==="quick"?7:28;
+  if(g.roundNumber>=max){g.phase="gameEnd";return g;}
+  g.owner=g.mode==="quick"?g.roundNumber%4:Math.floor(g.roundNumber/7);
+  g.contract=null;g.phase="select";g.trick=[];g.finishes=[];g.roundSummary=null;
+  dealHands(g,rng);
+  return g;
+}
+function beginGame(g, rng=Math.random){
+  assert(g.phase==="lobby","La partie est déjà lancée.");
+  assert(g.seats.length===4 && g.seats.every(s=>s && s.connected),"Il faut 4 joueurs connectés.");
+  g.phase="select";g.owner=0;
+  dealHands(g,rng);
+  return g;
+}
+function publicState(g,seat){
+  // Une seule main envoyée au participant. Ne jamais transmettre g.hands au complet.
+  const {hands,seats,...safe}=g;
+  const publicSeats=seats.map(s=>s?{name:s.name,connected:s.connected,bot:!!s.bot,avatar:s.avatar??0}:null);
+  return {...safe, seats:publicSeats, seat, myHand:seat>=0?hands[seat]:[],counts:hands.map(hand=>hand.length)};
+}
+
+return {CONTRACTS,CONTRACT_LABELS,SUITS,RANKS,TRICK_RANKS,SUIT_GLYPHS,SUIT_LABELS,initialGame,beginGame,availableContracts,legalTrickCards,legalTrixCards,startContract,playCard,settleTrick,startNextRound,publicState};
+})();
+const root=document.getElementById('app');
+const ROOM_PREFIX='trix-belote32-v1-';
+const PEER_OPTIONS={host:'0.peerjs.com',port:443,path:'/',secure:true,debug:0,config:{iceServers:[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'}]}};
+const SYMBOL={king:'♥',queens:'Q',hearts:'♥',tricks:'♠',last:'40',general:'Σ',trix:'J'};
+const DESCRIPTIONS={king:'Roi de cœur : +80 · fin dès sa capture · dernier pli joué : +40',queens:'Chaque Dame capturée : +30 points exactement · bonus distinct de +40 au dernier pli',hearts:'Chaque cœur : +10 · cœurs bloqués · dernier pli : +40',tricks:'Chaque pli : +10 · dernier pli : +40',last:'Dernier pli uniquement : +40',general:'Roi, dames, cœurs, plis cumulés · cœurs bloqués',trix:'Premier : −100 · deuxième : −50 · As : rejouer'};
+let host=false,peer=null,conn=null,links=new Map(),room='',game=null,view=null,mySeat=-1;
+let playedActionSeq=-1;
+let connecting=false,showRules=false,status='',noticeTimer=null,trickTimer=null,botTimer=null,localOnly=false;
+const social={messages:[],unread:0,open:false,alerts:[],voiceOn:false,muted:false,stream:null,calls:new Map(),audios:new Map(),roster:[],guestVoice:new Map(),lastChatBySeat:new Map(),nextId:0,bubbles:new Map()};
+const chatBubbleTimers=new Map();
+// L'application reste utilisable quand le navigateur bloque le stockage (aperçus et fichiers locaux).
+function storageOrMemory(kind){
+ try{const store=window[kind],key='__trix_test__';store.setItem(key,'1');store.removeItem(key);return store;}
+ catch {const map=new Map();return {getItem:key=>map.get(key)||null,setItem:(key,val)=>map.set(key,String(val)),removeItem:key=>map.delete(key)};}
+}
+const localStorage=storageOrMemory('localStorage');
+const sessionStorage=storageOrMemory('sessionStorage');
+let name=localStorage.getItem('trix_name')||'', roomInput=new URLSearchParams(location.search).get('room')||'',selectedMode='quick';
+let selectedAvatar=Number(localStorage.getItem('trix_avatar')||0);if(!(selectedAvatar>=0&&selectedAvatar<8))selectedAvatar=0;
+
+// Avatars vectoriels embarqués, donc aucun téléchargement ni image externe.
+const AVATAR_PRESETS=[
+ {bg:'#9abfa5',shirt:'#355f6c',skin:'#eac29d',hair:'#463631',style:0},
+ {bg:'#f1c88d',shirt:'#9e534a',skin:'#9b5d43',hair:'#261f28',style:1},
+ {bg:'#bdc5e6',shirt:'#525c8f',skin:'#f3cbad',hair:'#7a4e2f',style:2},
+ {bg:'#e5a9a6',shirt:'#7b3655',skin:'#bb8160',hair:'#322321',style:3},
+ {bg:'#9ed8c8',shirt:'#2b7973',skin:'#eab58b',hair:'#332b23',style:4},
+ {bg:'#dfc4ee',shirt:'#594a80',skin:'#a36d4d',hair:'#271c23',style:5},
+ {bg:'#a1c7e6',shirt:'#426fa1',skin:'#c0d3e9',hair:'#345a78',style:6},
+ {bg:'#e9c19f',shirt:'#947047',skin:'#dce2c6',hair:'#6a5f45',style:7}
+];
+function avatarSVG(id){
+ const p=AVATAR_PRESETS[Math.max(0,Math.min(7,Number(id)||0))];
+ const robo=p.style>=6;
+ if(robo)return `<svg viewBox="0 0 80 80" class="avatar-face" aria-hidden="true"><circle cx="40" cy="40" r="40" fill="${p.bg}"/><path d="M9 78 Q19 61 40 60 Q62 60 72 78" fill="${p.shirt}"/><rect x="17" y="22" width="46" height="39" rx="10" fill="${p.skin}" stroke="${p.hair}" stroke-width="2"/><path d="M40 21 V13" stroke="${p.hair}" stroke-width="3"/><circle cx="40" cy="12" r="4" fill="${p.shirt}"/><rect x="24" y="35" width="32" height="12" rx="6" fill="${p.hair}"/><circle cx="33" cy="41" r="3" fill="#effff3"/><circle cx="47" cy="41" r="3" fill="#effff3"/><path d="M34 54 Q40 57 46 54" fill="none" stroke="${p.hair}" stroke-width="2" stroke-linecap="round"/></svg>`;
+ const hair=p.style===1?'<path d="M19 40Q15 15 39 13Q65 13 61 39Q55 21 40 21Q24 23 19 40" fill="'+p.hair+'"/>':p.style===2?'<path d="M19 38Q9 15 31 13Q58 4 64 32L57 43Q57 23 41 24Q30 33 19 38" fill="'+p.hair+'"/>':p.style===3?'<path d="M13 41Q10 6 42 11Q68 11 67 42L58 53L56 28Q42 17 23 30L22 52Z" fill="'+p.hair+'"/>':p.style===5?'<path d="M17 50Q8 16 29 12Q59 3 64 31L66 55Q55 34 53 24Q32 37 21 31Z" fill="'+p.hair+'"/>':'<path d="M19 37Q13 15 34 13Q61 8 61 36L56 31L52 22Q35 35 19 37" fill="'+p.hair+'"/>';
+ return `<svg viewBox="0 0 80 80" class="avatar-face" aria-hidden="true"><circle cx="40" cy="40" r="40" fill="${p.bg}"/><path d="M5 80Q12 59 31 59H49Q68 59 75 80" fill="${p.shirt}"/><ellipse cx="40" cy="39" rx="21" ry="24" fill="${p.skin}"/>${hair}<ellipse cx="31" cy="41" rx="2.4" ry="3.2" fill="#293733"/><ellipse cx="48" cy="41" rx="2.4" ry="3.2" fill="#293733"/><path d="M32 51Q40 57 48 51" stroke="#9b5f52" stroke-width="2.4" stroke-linecap="round" fill="none"/>${p.style===4?'<rect x="23" y="36" width="34" height="11" rx="5" fill="none" stroke="#2a4e58" stroke-width="2"/><path d="M39 40h3" stroke="#2a4e58" stroke-width="2"/>':''}</svg>`;
+}
+function avatarPicker(extra=''){
+ return `<div class="avatar-picker ${extra}"><div class="picker-label">Choisir votre avatar</div>${AVATAR_PRESETS.map((p,i)=>`<button type="button" data-action="avatar" data-avatar="${i}" class="avatar-choice ${i===selectedAvatar?'selected':''}" title="Avatar ${i+1}" aria-label="Choisir avatar ${i+1}" aria-pressed="${i===selectedAvatar}">${avatarSVG(i)}</button>`).join('')}</div>`;
+}
+// Aucun effet de frappe au dépôt des cartes ; seuls des tons discrets signalent les événements importants.
+// La musique est une nappe très basse, volontairement désactivée par défaut.
+const audio={
+ ctx:null,musicTimer:null,padGains:[],sfxOn:localStorage.getItem('trix_sfx')!=='off',
+ musicOn:localStorage.getItem('trix_music_v8')==='on',step:0,lastSoundAt:-1,lastSoundType:'',
+ ensure(){try{if(!this.ctx){const A=window.AudioContext||window.webkitAudioContext;if(!A)return;this.ctx=new A();}if(this.ctx.state==='suspended')this.ctx.resume().catch(()=>{});}catch{}},
+ tone(freq,duration=.10,volume=.009,kind='sine',delay=0){
+  if(!this.ctx||this.ctx.state!=='running')return;
+  try{const t=this.ctx.currentTime+delay,osc=this.ctx.createOscillator(),gain=this.ctx.createGain();
+   osc.type=kind;osc.frequency.setValueAtTime(freq,t);
+   gain.gain.setValueAtTime(.00001,t);
+   gain.gain.exponentialRampToValueAtTime(Math.max(.00003,volume),t+.025);
+   gain.gain.exponentialRampToValueAtTime(.00001,t+duration);
+   osc.connect(gain);gain.connect(this.ctx.destination);osc.start(t);osc.stop(t+duration+.02);
+  }catch{}
+ },
+ play(type){
+  if(!this.sfxOn || type==='card')return; // silence total lors de chaque pose de carte
+  this.ensure();if(!this.ctx||this.ctx.state!=='running')return;
+  const now=this.ctx.currentTime*1000;
+  // Supprime les bips en rafale lorsque les IA jouent rapidement.
+  const gap=type==='trick'?1450:type==='fin'?1600:1100;
+  if(this.lastSoundAt>=0&&now-this.lastSoundAt<gap)return;
+  this.lastSoundAt=now;this.lastSoundType=type;
+  if(type==='ace'){this.tone(440,.16,.010,'sine');this.tone(554,.22,.007,'sine',.11);}
+  else if(type==='trick'){this.tone(245,.17,.011,'triangle');this.tone(327,.22,.008,'sine',.13);}
+  else if(type==='contract'){this.tone(293.66,.20,.008,'sine');this.tone(392,.25,.007,'sine',.18);}
+  else if(type==='fin'){this.tone(261.63,.25,.009,'sine');this.tone(392,.35,.008,'sine',.25);}
+  else if(type==='join'){this.tone(330,.18,.007,'sine');}
+ },
+ pad(freq,duration=6.5,volume=.002){
+  if(!this.ctx||this.ctx.state!=='running')return;
+  try{const t=this.ctx.currentTime,osc=this.ctx.createOscillator(),g=this.ctx.createGain();
+   osc.type='sine';osc.frequency.value=freq;
+   g.gain.setValueAtTime(.00001,t);
+   g.gain.linearRampToValueAtTime(volume,t+1.4);
+   g.gain.setValueAtTime(volume,t+duration-2);
+   g.gain.linearRampToValueAtTime(.00001,t+duration);
+   osc.connect(g);g.connect(this.ctx.destination);osc.start(t);osc.stop(t+duration+.05);
+   this.padGains.push(g);osc.onended=()=>{this.padGains=this.padGains.filter(x=>x!==g);};
+  }catch{}
+ },
+ begin(){
+  this.ensure();if(!this.musicOn||this.musicTimer)return;
+  const tick=()=>{if(!this.ctx||this.ctx.state!=='running'||!this.musicOn)return;
+   const chords=[[130.81,164.81],[146.83,196],[130.81,174.61],[146.83,164.81]];
+   const chord=chords[this.step++%chords.length];
+   this.pad(chord[0],7,.0018);this.pad(chord[1],7,.0011);
+  };
+  tick();this.musicTimer=setInterval(tick,11000);
+ },
+ stop(){if(this.musicTimer){clearInterval(this.musicTimer);this.musicTimer=null;}
+  if(this.ctx){const t=this.ctx.currentTime;for(const g of this.padGains){try{g.gain.cancelScheduledValues(t);g.gain.setTargetAtTime(.00001,t,.04);}catch{}}}
+ },
+ toggle(kind){
+  this.ensure();if(kind==='music'){
+   this.musicOn=!this.musicOn;localStorage.setItem('trix_music_v8',this.musicOn?'on':'off');
+   this.musicOn?this.begin():this.stop();
+  }else{
+   this.sfxOn=!this.sfxOn;localStorage.setItem('trix_sfx',this.sfxOn?'on':'off');
+  }
+  render();
+ }
+};
+function soundButtons(){return `<button class="icon-btn audio-button ${audio.sfxOn?'':'is-off'}" data-action="sound" aria-pressed="${audio.sfxOn}" title="Activer / couper les effets sonores"><span class="audio-led"></span>Effets ${audio.sfxOn?'ON':'OFF'}</button><button class="icon-btn audio-button ${audio.musicOn?'':'is-off'}" data-action="music" aria-pressed="${audio.musicOn}" title="Activer / couper la musique"><span class="audio-led"></span>Musique ${audio.musicOn?'ON':'OFF'}</button>`;}
+function presentStateChange(oldV,newV){
+ if(!newV)return;
+ const oldPhase=oldV?.phase;
+ const justFinished=!!oldPhase && oldPhase!==newV.phase && (newV.phase==='roundEnd'||newV.phase==='gameEnd');
+ if(justFinished)audio.play('fin');
+ const a=newV.lastAction;
+ if(!a||a.seq===playedActionSeq)return;
+ playedActionSeq=a.seq;
+ if(oldV && oldV.actionSeq!==newV.actionSeq){
+   if(!justFinished)audio.play(a.type||'card');
+ }
+}
+
+const esc=(s)=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const cap=(s,n)=>String(s??'').trim().slice(0,n);
+const format=(n)=>n>0?'+'+n:String(n);
+const idPeer=code=>ROOM_PREFIX+code.toLowerCase();
+const linkRoom=code=>{const u=new URL(location.href);u.search='?room='+code;u.hash='';return u.href;};
+function inviteText(){if(localOnly)return 'Mode solo sans invitation.';return location.protocol==='file:'?`Rejoins ma partie de TRIX ! Code : ${room}\nOuvre le même fichier TRIX_Belote_V12.html et saisis ce code.`:`Rejoins ma partie de TRIX (32 cartes, 4 joueurs) ! Code : ${room}\n${linkRoom(room)}`;}
+function randomId(len=6){const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';const bytes=new Uint8Array(len);crypto.getRandomValues(bytes);return [...bytes].map(b=>chars[b%chars.length]).join('');}
+function getToken(code){let key='trix_token_'+code, v=sessionStorage.getItem(key);if(!v){v=crypto.randomUUID?.()||`${Date.now()}-${Math.random()}`;sessionStorage.setItem(key,v);}return v;}
+function setNotice(msg){status=msg;render();clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>{status='';render();},4400);}
+function resetConnections(){stopVoice(true);social.messages=[];social.unread=0;social.open=false;social.alerts=[];social.bubbles.clear();for(const timer of chatBubbleTimers.values())clearTimeout(timer);chatBubbleTimers.clear();social.roster=[];social.guestVoice.clear();social.lastChatBySeat.clear();try{conn?.close();}catch{} try{peer?.destroy();}catch{} for(const c of links.keys())try{c.close();}catch{};conn=null;peer=null;links.clear();game=null;view=null;host=false;connecting=false;mySeat=-1;room='';clearTimeout(trickTimer);clearTimeout(botTimer);localOnly=false;renderSocial();}
+function displayView(){return host&&game?publicState(game,0):view;}
+function persistHost(){if(!host||!game)return;try{localStorage.setItem('trix_save_'+room,JSON.stringify(game));if(!localOnly)localStorage.setItem('trix_last_host',room);}catch{}}
+function broadcast(){if(!game)return;persistHost();const prior=view;view=publicState(game,0);presentStateChange(prior,view);for(const [c,seat] of links)if(c.open)try{c.send({type:'state',view:publicState(game,seat),room});}catch{};broadcastRoster();render();scheduleBot();}
+function sendError(c,reason){try{c.send({type:'error',message:reason});}catch{}}
+function receiveHost(c,msg){
+ if(!msg || typeof msg!=='object')return;
+ if(msg.type==='join'){
+   const token=cap(msg.token,128), person=cap(msg.name,20)||'Invité';
+   if(!token){sendError(c,'Identité invalide.');return;}
+   let seat=game.seats.findIndex((s,i)=>i>0&&s?.token===token);
+   // Un véritable ami peut reprendre une place occupée par l’IA jusqu'au début de la partie.
+   if(seat<0 && game.phase==='lobby')seat=game.seats.findIndex((s,i)=>i>0&&(!s||s.bot));
+   if(seat<0){sendError(c,game.phase==='lobby'?'Ce salon est plein.':'Partie commencée : seuls les joueurs déjà inscrits peuvent revenir.');c.close();return;}
+   for(const [old,s] of links)if(s===seat&&old!==c){links.delete(old);try{old.close();}catch{}}
+   game.seats[seat]={name:person,token,connected:true,bot:false,avatar:Math.min(7,Math.max(0,Number(msg.avatar)||0))};links.set(c,seat);
+   c.send({type:'welcome',seat,room});c.send({type:'chat-history',messages:social.messages});broadcast();return;
+ }
+ const seat=links.get(c);
+ if(seat===undefined){sendError(c,'Rejoins d’abord la partie.');return;}
+ if(msg.type==='chat'){relayChat(seat,msg.text);return;}
+ if(msg.type==='voice-status'){social.guestVoice.set(c.peer,!!msg.active);broadcastRoster();return;}
+ if(msg.type==='action')applyAction(seat,msg.action,c);
+}
+function accept(c){
+ c.on('data',m=>receiveHost(c,m));
+ c.on('close',()=>{const seat=links.get(c);if(seat!==undefined){links.delete(c);if(game?.seats[seat]){game.seats[seat].connected=false;social.guestVoice.delete(c.peer);broadcast();}}});
+ c.on('error',()=>{});
+}
+function startHosting(recover=false){
+ const inputName=cap(name,20)||'Hôte';name=inputName;localStorage.setItem('trix_name',name);
+ let code=recover?cap(roomInput,6).toUpperCase():randomId();
+ if(!/^[A-Z2-9]{6}$/.test(code)){setNotice('Code de salon invalide.');return;}
+ resetConnections();host=true;room=code;roomInput=room;connecting=true;mySeat=0;
+ if(recover){try{game=JSON.parse(localStorage.getItem('trix_save_'+room));}catch{};}
+ if(!game || !Array.isArray(game.seats) || game.seats.length!==4)game=initialGame(name,selectedMode,getToken(room));
+ game.seats[0]={name,token:getToken(room),connected:true,bot:false,avatar:selectedAvatar};
+ for(let i=1;i<4;i++)if(game.seats[i])game.seats[i].connected=!!game.seats[i].bot;
+ if(game.locked&&game.trick?.length===4)settleTrick(game);
+ // Migration d'un salon créé par l'ancienne version avant distribution.
+ if(game.phase==='select' && game.hands?.every(h=>h.length===0)){
+   const deck=shuffle(deck32());game.hands=[0,1,2,3].map(i=>sortHand(deck.slice(i*8,(i+1)*8)));
+ }
+ const u=new URL(location.href);u.searchParams.set('room',room);try{history.replaceState({},'',u);}catch{}
+ if(!window.Peer){setNotice('Connexion indisponible : la bibliothèque réseau n’a pas chargé. Vérifie Internet.');resetConnections();render();return;}
+ peer=new window.Peer(idPeer(room),PEER_OPTIONS);
+ peer.on('open',()=>{connecting=false;broadcast();});
+ peer.on('connection',accept);
+ peer.on('call',receiveVoiceCall);
+ peer.on('disconnected',()=>{setNotice('Signalisation interrompue. Tentative de reconnexion…');try{peer.reconnect();}catch{}});
+ peer.on('error',err=>{if(err.type==='unavailable-id'){resetConnections();setNotice('Ce code est déjà utilisé. Crée un autre salon.');}else setNotice('Connexion : '+(err?.message||'erreur inconnue'));});
+ render();
+}
+function startOffline(){
+ const inputName=cap(name,20)||'Joueur';name=inputName;localStorage.setItem('trix_name',name);
+ resetConnections();host=true;localOnly=true;room='SOLO';mySeat=0;connecting=false;
+ game=initialGame(name,selectedMode,'offline-host');game.seats[0].avatar=selectedAvatar;
+ for(let i=1;i<4;i++)game.seats[i]=makeBot(i);
+ broadcast();
+}
+function makeBot(seat){
+ return {name:`IA ${seat}`,connected:true,bot:true,token:null,avatar:seat%2?6:7};
+}
+function botContract(g){
+ const available=availableContracts(g);
+ const hand=g.hands[g.owner]; // Seules les cartes de l'IA chef sont consultées.
+ // Estimation du risque à partir de la main déjà distribuée, sans voir les autres.
+ const highCards=hand.filter(c=>['K','A','10'].includes(c.slice(1))).length;
+ const queens=hand.filter(c=>c.slice(1)==='Q').length;
+ const hearts=hand.filter(c=>c[0]==='H').length;
+ const hasKing=hand.includes('HK');
+ const jacks=hand.filter(c=>c.slice(1)==='J').length;
+ const nearJacks=hand.filter(c=>['10','Q'].includes(c.slice(1))).length;
+ const estimate={
+   king: (hasKing?70:0)+highCards*3,
+   queens:queens*26+highCards*2,
+   hearts:hearts*9+highCards*2,
+   tricks:highCards*10,
+   last:highCards*7,
+   general:(hasKing?80:0)+queens*28+hearts*9+highCards*11,
+   trix:40-jacks*10-nearJacks*3
+ };
+ return [...available].sort((a,b)=>estimate[a]-estimate[b] || CONTRACTS.indexOf(a)-CONTRACTS.indexOf(b))[0];
+}
+function botCard(g,seat){
+ const hand=g.hands[seat];
+ const legal=g.contract==='trix'?legalTrixCards(hand,g.piles):legalTrickCards(hand,g.trick,g.contract,g.heartsBroken);
+ if(!legal.length)return null;
+ if(g.contract==='trix'){
+   // Favorise la progression et l'ouverture de couleurs bloquées dans sa main.
+   return [...legal].sort((a,b)=>{
+     const quality=c=>{
+       const same=hand.filter(x=>x[0]===c[0]).length;
+       const rank=RANKS.indexOf(c.slice(1));
+       return (c.slice(1)==='J'?1:0)+same*.4+Math.abs(rank-4)*.15;
+     };
+     return quality(b)-quality(a);
+   })[0];
+ }
+ const trick=g.trick;
+ const suit=trick.length?trick[0].card[0]:null;
+ const highest=trick.filter(t=>t.card[0]===suit).reduce((v,t)=>Math.max(v,TRICK_RANKS.indexOf(t.card.slice(1))),-1);
+ const last=hand.length===1;
+ const riskSuit=(c)=>{
+   let points=0;
+   if(['king','general'].includes(g.contract)&&c==='HK')points+=80;
+   if(['queens','general'].includes(g.contract)&&c.slice(1)==='Q')points+=30;
+   if(['hearts','general'].includes(g.contract)&&c[0]==='H')points+=10;
+   return points;
+ };
+ function value(card){
+   const rank=TRICK_RANKS.indexOf(card.slice(1));
+   const ownPenalty=riskSuit(card);
+   const onTable=trick.reduce((sum,t)=>sum+riskSuit(t.card),0);
+   const winsNow=!trick.length|| (card[0]===suit && rank>highest);
+   const trickPenalty=['tricks','general'].includes(g.contract)?10:0;
+   const lastPenalty=last?40:0;
+   const penalty=onTable+ownPenalty+trickPenalty+lastPenalty;
+   // Prend en compte les cartes connues sur la table seulement : pas de triche avec les mains adverses.
+   if(trick.length===3)return (winsNow?penalty*6:0)+(winsNow?rank*.75:-rank*.5) + (winsNow?ownPenalty*2:0);
+   if(trick.length){
+     return (winsNow?penalty*2+rank*1.1:-rank*.85) + (winsNow?ownPenalty:0);
+   }
+   // À l'entame : perdre un pli risqué est préférable, mais défausser un gros rang peut aider.
+   return rank*1.6 +ownPenalty*.75 + (card[0]==='H'&&['hearts','general','king'].includes(g.contract)?8:0) + (last?rank*2:0);
+ }
+ return [...legal].sort((a,b)=>value(a)-value(b))[0];
+}
+function scheduleBot(){
+ clearTimeout(botTimer);
+ if(!host||!game)return;
+ if(game.phase==='select'&&game.seats[game.owner]?.bot){
+   const expected=game.roundNumber,owner=game.owner;
+   botTimer=setTimeout(()=>{if(host&&game?.phase==='select'&&game.owner===owner&&game.roundNumber===expected&&game.seats[owner]?.bot){applyAction(owner,{kind:'choose',contract:botContract(game)});}},650);
+ }else if(game.phase==='play'&&!game.locked&&game.seats[game.current]?.bot){
+   const expected=game.current,round=game.roundNumber,number=game.hands[expected].length;
+   botTimer=setTimeout(()=>{
+     if(!host||game?.phase!=='play'||game.locked||game.current!==expected||game.roundNumber!==round||!game.seats[expected]?.bot||game.hands[expected].length!==number)return;
+     const card=botCard(game,expected);
+     if(card)applyAction(expected,{kind:'card',card});
+   },650);
+ }
+}
+function joinRoom(){
+ let code=cap(roomInput.toUpperCase().replace(/\s|-/g,''),6);
+ if(!/^[A-Z2-9]{6}$/.test(code)){setNotice('Entre un code à 6 caractères.');return;}
+ name=cap(name,20)||'Invité';localStorage.setItem('trix_name',name);
+ resetConnections();room=code;connecting=true;host=false;mySeat=-1;
+ const u=new URL(location.href);u.searchParams.set('room',room);try{history.replaceState({},'',u);}catch{}
+ if(!window.Peer){setNotice('Connexion indisponible : vérifie Internet.');resetConnections();render();return;}
+ peer=new window.Peer(PEER_OPTIONS);
+ peer.on('open',()=>{connectGuest();});
+ peer.on('call',receiveVoiceCall);
+ peer.on('error',err=>{setNotice('Connexion : '+(err?.message||'erreur'));connecting=false;});
+ peer.on('disconnected',()=>{try{peer.reconnect();}catch{}});
+ render();
+}
+function connectGuest(){
+ if(!peer||host)return;
+ conn=peer.connect(idPeer(room),{reliable:true,serialization:'json'});
+ conn.on('open',()=>{conn.send({type:'join',name,token:getToken(room),avatar:selectedAvatar});});
+ conn.on('data',msg=>{
+   if(msg?.type==='welcome'){mySeat=msg.seat;connecting=false;render();}
+   else if(msg?.type==='state'){const old=view;view=msg.view;connecting=false;presentStateChange(old,view);render();}
+   else if(msg?.type==='chat-history'){social.messages=Array.isArray(msg.messages)?msg.messages.slice(-60).map(cleanChat).filter(Boolean):[];renderSocial();}
+   else if(msg?.type==='chat-message'){receiveChat(msg.message);}
+   else if(msg?.type==='voice-roster'){social.roster=Array.isArray(msg.roster)?msg.roster.filter(r=>r&&typeof r.peerId==='string'&&r.peerId.length<140):[];syncVoiceCalls();renderSocial();}
+   else if(msg?.type==='error'){setNotice(msg.message);connecting=false;}
+   else if(msg?.type==='kick'){setNotice('Tu as été retiré du salon.');resetConnections();render();}
+ });
+ conn.on('close',()=>{if(peer&&!peer.destroyed){view=null;connecting=false;setNotice('Connexion à l’hôte perdue. Rejoins la salle avec le même code.');}});
+ conn.on('error',()=>{connecting=false;setNotice('Impossible de joindre l’hôte. Vérifie que son salon est ouvert.');});
+}
+function applyAction(seat, action, source){
+ if(!game || !action || typeof action!=='object')return;
+ try{
+  if(action.kind==='addbot'){
+    if(seat!==0||game.phase!=='lobby')throw Error('Les IA s’ajoutent depuis le salon par l’hôte.');
+    const target=Number(action.seat);
+    if(![1,2,3].includes(target)||game.seats[target]?.connected)throw Error('Cette place est déjà occupée.');
+    if(game.seats[target]&&!game.seats[target].bot){
+      for(const [c,s] of links)if(s===target){links.delete(c);try{c.send({type:'kick'});c.close();}catch{}}
+    }
+    game.seats[target]=makeBot(target);
+  }
+  else if(action.kind==='fillbots'){
+    if(seat!==0||game.phase!=='lobby')throw Error('Action réservée à l’hôte.');
+    for(let i=1;i<4;i++)if(!game.seats[i]?.connected){
+      for(const [c,s] of links)if(s===i){links.delete(c);try{c.send({type:'kick'});c.close();}catch{}}
+      game.seats[i]=makeBot(i);
+    }
+  }
+  else if(action.kind==='replacebot'){
+    if(seat!==0||game.phase==='gameEnd'||game.phase==='lobby')throw Error('Action réservée à l’hôte durant la partie.');
+    const target=Number(action.seat);
+    if(![1,2,3].includes(target)||!game.seats[target]||game.seats[target].bot||game.seats[target].connected)throw Error('Seul un joueur déconnecté peut être remplacé.');
+    game.seats[target]={...makeBot(target),name:game.seats[target].name+' (IA)'};
+  }
+  else if(action.kind==='beginwithbots'){
+    if(seat!==0||game.phase!=='lobby')throw Error('Le remplissage rapide est réservé à l’hôte.');
+    for(let i=1;i<4;i++)if(!game.seats[i]?.connected)game.seats[i]=makeBot(i);
+    beginGame(game);
+  }
+  else if(action.kind==='avatar'){
+    const avatar=Number(action.avatar);
+    if(!Number.isInteger(avatar)||avatar<0||avatar>7)throw Error('Avatar non disponible.');
+    if(!game.seats[seat]||game.seats[seat].bot)throw Error('Modification non autorisée.');
+    game.seats[seat].avatar=avatar;
+  }
+  else if(action.kind==='begin'){if(seat!==0)throw Error('Seul l’hôte démarre la partie.');beginGame(game);}
+  else if(action.kind==='choose'){if(seat!==game.owner)throw Error('C’est au joueur qui dirige le contrat de choisir.');startContract(game,action.contract);}
+  else if(action.kind==='card'){
+    playCard(game,seat,action.card);
+    if(game.locked){clearTimeout(trickTimer);trickTimer=setTimeout(()=>{if(game?.locked&&game.trick.length===4){try{settleTrick(game);broadcast();}catch(e){setNotice(e.message);}}},2150);}
+  }
+  else if(action.kind==='next')startNextRound(game);
+  else if(action.kind==='rename'){game.seats[seat].name=cap(action.name,20)||`Joueur ${seat+1}`;}
+  else if(action.kind==='remove'){
+    if(seat!==0||game.phase!=='lobby')throw Error('Action non autorisée.');
+    const target=Number(action.seat);
+    if(target<1||target>3||!game.seats[target])throw Error('Joueur introuvable.');
+    for(const [c,s] of links)if(s===target){links.delete(c);try{c.send({type:'kick'});c.close();}catch{}}
+    game.seats[target]=null;
+  }
+  else if(action.kind==='reset'){
+    if(seat!==0||game.phase!=='gameEnd')throw Error('Action non autorisée.');
+    const seats=game.seats;game=initialGame(seats[0].name,game.mode,seats[0].token);game.seats=seats;
+    for(let i=1;i<4;i++)if(!seats[i]?.connected)game.seats[i]=null;
+  }
+  else throw Error('Action inconnue.');
+  broadcast();
+ }catch(e){if(source)sendError(source,e.message);else setNotice(e.message);}
+}
+function action(a){if(host)applyAction(0,a);else if(conn?.open)conn.send({type:'action',action:a});else setNotice('Aucune connexion active.');}
+function copyValue(txt){
+ const doFallback=()=>{let input=document.createElement('textarea');input.value=txt;document.body.appendChild(input);input.select();document.execCommand('copy');input.remove();};
+ if(navigator.clipboard?.writeText)navigator.clipboard.writeText(txt).then(()=>setNotice('Copié dans le presse-papiers.')).catch(()=>{doFallback();setNotice('Copié.');});
+ else {doFallback();setNotice('Copié.');}
+}
+function playerName(v,seat){return v.seats[seat]?.name||`Joueur ${seat+1}`;}
+function cardHTML(card,attrs=''){
+ const suit=card[0],r=card.slice(1);return `<button class="playing-card ${suit==='H'||suit==='D'?'red':'black'}" ${attrs} aria-label="${esc(r)} de ${SUIT_LABELS[suit]}"><span class="card-corner"><b>${r}</b><em>${SUIT_GLYPHS[suit]}</em></span><span class="card-suit">${SUIT_GLYPHS[suit]}</span><span class="card-corner inverted"><b>${r}</b><em>${SUIT_GLYPHS[suit]}</em></span></button>`;
+}
+function nameBadge(v,seat){const s=v.seats[seat];const current=v.phase==='play'&&v.current===seat&&!v.locked;return `<div class="seat-title"><span class="status-dot ${s?.connected?'online':'offline'}"></span><strong>${esc(playerName(v,seat))}</strong>${s?.bot?'<span class="bot-tag">IA</span>':''}${seat===v.owner?'<span class="small-tag">Chef ×2</span>':''}${seat===mySeat?'<span class="you-tag">Moi</span>':''}</div><div class="seat-meta">${v.counts?.[seat]??0} cartes · ${format(v.scores[seat])} pts ${v.roundScores?.[seat]?' · manche '+format(v.roundScores[seat]):''}</div>${current?'<div class="seat-turn">À son tour</div>':''}`;}
+function showScores(v,compact=false){return `<div class="score-grid ${compact?'compact':''}">${v.seats.map((seat,i)=>`<div data-chat-seat="${i}" class="score-tile ${i===mySeat?'is-me':''}"><div class="score-player"><span class="score-portrait">${avatarSVG(seat?.avatar??0)}</span><span class="score-name">${esc(seat?.name||'Libre')}${seat?.bot?' · IA':''}${v.phase!=='lobby'&&i===v.owner?' · Chef ×2':''}</span></div><div class="score-num">${format(v.scores[i])}<small>pts</small></div><div class="score-round">${v.phase==='lobby'?'En attente':`Cette manche : ${format(v.roundScores[i])}`}</div></div>`).join('')}</div>`;}
+function header(v){return `<header class="header"><a class="hub-link" href="/">← Jeux</a><div class="brand" aria-label="TRIX"><span class="logo-mark">T<span>R</span>IX<span class="brand-dot">.</span></span><span class="brand-sub">ÉDITION BELOTE</span></div><div class="header-right"><span class="chip-online"><span class="status-dot online"></span>${localOnly?'Partie solo':`Salon ${esc(room)}`}</span>${localOnly?'':`<button class="icon-btn" data-action="copy-invite" title="Copier l’invitation">Inviter</button>`}${soundButtons()}<button class="icon-btn" data-action="rules" title="Voir les règles">Règles</button><button class="icon-btn" data-action="leave">Accueil</button></div></header>`;}
+function renderLanding(){
+ const saved=localStorage.getItem('trix_last_host'), old=saved&&localStorage.getItem('trix_save_'+saved);
+ return `<main class="landing"><header class="landing-header"><a class="hub-link" href="/">← Tous les jeux</a><div class="brand"><span class="logo-mark">T<span>R</span>IX<span class="brand-dot">.</span></span><span class="brand-sub">ÉDITION BELOTE</span></div><span class="live-pill"><i></i> AMIS + IA · 4 PLACES</span></header>
+ <section class="hero"><div class="hero-content"><div class="eyebrow"><span class="eyebrow-line"></span> LE JEU DES SOIRÉES ENTRE AMIS</div><h1>Les cartes.<br><em>Les amis.</em><br>La revanche.</h1><p>Votre Trix, avec les règles que vous aimez. Une table privée, quatre places, des amis ou des IA, sept contrats et des points calculés automatiquement.</p><div class="hero-stats"><div><strong>32</strong><span>cartes de belote</span></div><div><strong>04</strong><span>amis ou IA</span></div><div><strong>07</strong><span>contrats</span></div></div></div><div class="hero-cards"><div class="hero-card back a"></div><div class="hero-card front b"><div class="hero-rank">K<br>♥</div><div class="hero-symbol">♥</div><div class="hero-rank bottom">K<br>♥</div></div><div class="hero-card front c"><div class="hero-rank">Q<br>♠</div><div class="hero-symbol dark">♠</div><div class="hero-rank bottom">Q<br>♠</div></div></div></section>
+ <section class="entry" id="join"><div class="entry-heading"><div><span class="section-kicker">ENTRER DANS LE JEU</span><h2>Une table vous attend.</h2></div><span class="tiny-note">Aucun compte nécessaire</span></div>
+ <div class="entry-panels"><div class="entry-panel"><span class="panel-id">01 / CRÉER</span><h3>Je crée un salon</h3><p>Invitez jusqu’à trois amis et complétez les places libres avec des IA.</p><label class="field-label" for="player-name">Votre prénom</label><input id="player-name" class="field" maxlength="20" placeholder="Ex. Amira" value="${esc(name)}" autocomplete="nickname"/>${avatarPicker()}<div class="field-label">Format de la partie</div><div class="mode-pills"><button data-action="setmode" data-mode="quick" class="mode-pill ${selectedMode==='quick'?'selected':''}">Rapide <small>7 manches</small></button><button data-action="setmode" data-mode="full" class="mode-pill ${selectedMode==='full'?'selected':''}">Complète <small>28 manches</small></button></div><button class="primary-btn" data-action="create">Créer un salon en ligne <span>→</span></button><button class="solo-btn" data-action="solo">Jouer maintenant contre 3 IA <span>→</span></button><div class="offline-hint">Mode solo : fonctionne même sans connexion Internet.</div></div>
+ <div class="entry-panel second"><span class="panel-id">02 / REJOINDRE</span><h3>Je rejoins des amis</h3><p>Renseignez le code transmis par la personne qui a créé le salon.</p><label class="field-label" for="join-name">Votre prénom</label><input id="join-name" class="field" maxlength="20" placeholder="Votre prénom" value="${esc(name)}" autocomplete="nickname"/>${avatarPicker("join-avatar-picker")}<label class="field-label" for="room-code">Code du salon</label><input id="room-code" class="field code-field" maxlength="8" placeholder="EX. AB4K7T" value="${esc(roomInput)}" spellcheck="false" autocapitalize="characters"/><button class="secondary-btn" data-action="join">Rejoindre la partie <span>→</span></button>${old?`<button class="resume-link" data-action="recover" data-room="${esc(saved)}">Reprendre mon salon précédent (${esc(saved)})</button>`:''}</div></div>
+ </section><div class="landing-audio">${soundButtons()} <span>Musique désactivée par défaut. Aucun bruit de frappe des cartes. Effets facultatifs pour les événements importants.</span></div><footer class="landing-footer"><span>TRIX — Règles personnalisées</span><button data-action="rules">Consulter les règles et les points ↗</button></footer></main>`;
+}
+function renderLobby(v){
+ const count=v.seats.filter(s=>s?.connected).length;
+ return `${header(v)}<main class="game-main"><section class="room-heading"><div><span class="section-kicker">SALON PRIVÉ</span><h1>La table se prépare<span class="title-period">.</span></h1><p>Ajoutez des IA ou invitez des amis. Démarrez dès que les quatre places sont occupées.</p></div><div class="room-code-box">${localOnly?'<span>MODE HORS LIGNE</span><strong>3 IA</strong><small>Partie sur cet appareil</small>':`<span>CODE DU SALON</span><strong>${esc(room)}</strong><button data-action="copy-invite">Copier l’invitation ↗</button>`}</div></section>
+ <div class="lobby-layout"><section class="lobby-card"><div class="panel-top"><h2>Les joueurs</h2><span>${count} / 4 présents</span></div><div class="lobby-seats">${v.seats.map((s,i)=>`<div data-chat-seat="${i}" class="lobby-seat ${s?.connected?'occupied':''}"><div class="avatar ${s?'avatar-portrait':'avatar-placeholder'}">${s?avatarSVG(s.avatar??0):String(i+1)}</div><div><strong>${esc(s?.name||'Place libre')}</strong><small>${i===0?'Hôte':s?.bot?'Adversaire automatique':s?.connected?'Connecté':s?'Déconnecté':'En attente d’un joueur'}</small></div>${host&&i>0&&s?`<button class="remove-seat" data-action="remove" data-seat="${i}">Retirer</button>`:host&&i>0?`<button class="add-ai" data-action="addbot" data-seat="${i}">+ Ajouter une IA</button>`:s?.connected?'<span class="online-word">PRÊT</span>':''}</div>`).join('')}</div>${mySeat>=0&&v.seats[mySeat]&&!v.seats[mySeat].bot?avatarPicker("lobby-avatar-picker"):""}${host?`${count<4?'<button class="solo-btn fill-bots" data-action="fillbots">Compléter avec des IA <span>+</span></button>':''}<button class="outline-btn quick-start" data-action="beginwithbots">Commencer maintenant · compléter par IA</button><button class="primary-btn" data-action="begin" ${count!==4?'disabled':''}>${count===4?'Commencer la partie':'En attente des joueurs…'} <span>→</span></button>`:'<div class="waiting-state"><span class="pulse-circle"></span> L’hôte démarrera la partie quand tout le monde sera connecté.</div>'}</section>
+ <aside class="lobby-side"><div class="info-panel"><span class="section-kicker">VOTRE PARTIE</span><h3>${v.mode==='quick'?'Mode rapide':'Mode complet'}</h3><p>${v.mode==='quick'?'7 manches au total, un contrat différent à chaque manche.':'4 royaumes de 7 manches ; chaque joueur choisit les contrats pendant son royaume.'}</p><div class="info-line"><span>Jeu</span><strong>32 cartes · 7 à As</strong></div><div class="info-line"><span>Objectif</span><strong>Le plus petit score</strong></div><div class="info-line"><span>Dernier pli</span><strong>+40 (hors Trix)</strong></div><div class="info-line"><span>Force des cartes</span><strong>As &gt; 10 &gt; Roi</strong></div><div class="info-line"><span>Chef du contrat</span><strong>Son score ×2</strong></div></div>${localOnly?'':`<button class="outline-btn" data-action="copy-invite">Partager le code et le lien</button>`}<p class="lobby-hint">${localOnly?'Vous jouez directement contre les IA, sans connexion Internet.':'L’hôte doit garder cette page ouverte. Avant le lancement, les amis peuvent prendre la place d’une IA, même si la table est pleine.'}</p></aside></div></main>`;
+}
+function disconnectedControls(v){
+ if(!host)return '';
+ const disconnected=v.seats.map((s,i)=>({s,i})).filter(({s,i})=>i>0&&s&&!s.bot&&!s.connected);
+ if(!disconnected.length)return '';
+ return `<div class="disconnected-controls"><strong>Joueur déconnecté</strong> ${disconnected.map(({s,i})=>`<button data-action="replacebot" data-seat="${i}">Remplacer ${esc(s.name)} par une IA</button>`).join('')}</div>`;
+}
+function renderSelect(v){
+ const chooser=v.owner===mySeat;
+ const options=availableContracts(v);
+ return `${header(v)}<main class="game-main"><div class="match-top"><div><span class="section-kicker">MANCHE ${v.roundNumber+1} / ${v.mode==='quick'?7:28} ${v.mode==='full'?`· ROYAUME ${v.owner+1} / 4`:''}</span><h1>Choisir le contrat<span class="title-period">.</span></h1><p>${chooser?'À vous de choisir les règles de cette manche.':`${esc(playerName(v,v.owner))} choisit le prochain contrat.`}</p></div><span class="selection-owner">Chef de manche ×2 : <strong>${esc(playerName(v,v.owner))}</strong></span></div>
+ ${showScores(v,true)}${disconnectedControls(v)}
+ <section class="predeal-hand"><div class="predeal-heading"><div><span class="section-kicker">CARTES DÉJÀ DISTRIBUÉES</span><h2>Vos 8 cartes</h2><p>${chooser?'Regardez votre main, puis choisissez le contrat qui vous convient.':'Consultez vos cartes pendant que le chef de manche choisit le contrat.'}</p></div><span class="dealt-tag">✓ Main distribuée</span></div><div class="hand-cards select-hand" aria-label="Vos huit cartes avant le choix du contrat">${v.myHand.map(card=>cardHTML(card,'disabled')).join('')}</div></section>
+ <section class="contracts-section"><div class="section-header"><h2>Les contrats disponibles</h2><span>${options.length} restant${options.length>1?'s':''}</span></div><div class="contract-grid">${CONTRACTS.map(c=>`<button class="contract-card ${c==='general'?'featured':''} ${!options.includes(c)?'used':''}" data-action="choose" data-contract="${c}" ${!chooser||!options.includes(c)?'disabled':''}><div class="contract-icon">${SYMBOL[c]}</div><div class="contract-body"><strong>${CONTRACT_LABELS[c]}</strong><small>${DESCRIPTIONS[c]}</small></div><span class="contract-arrow">${options.includes(c)?'↗':'✓'}</span></button>`).join('')}</div></section></main>`;
+}
+function renderPlaying(v){
+ const isTrix=v.contract==='trix',isMyTurn=v.current===mySeat&&!v.locked;
+ const relativeSeats=[(Math.max(0,mySeat)+2)%4,(Math.max(0,mySeat)+3)%4,(Math.max(0,mySeat)+1)%4,Math.max(0,mySeat)];
+ const playable=isTrix?legalTrixCards(v.myHand,v.piles):legalTrickCards(v.myHand,v.trick,v.contract,v.heartsBroken);
+ const ranks=isTrix?RANKS:TRICK_RANKS;
+ const sorted=[...v.myHand].sort((a,b)=>SUITS.indexOf(a[0])-SUITS.indexOf(b[0])||ranks.indexOf(a.slice(1))-ranks.indexOf(b.slice(1)));
+ const last=v.lastTrick&&Object.keys(v.lastTrick).length&&v.lastTrick.cards?.length?v.lastTrick:null;
+ return `${header(v)}<main class="game-main playing-page"><div class="match-top tight"><div><span class="section-kicker">MANCHE ${v.roundNumber+1} / ${v.mode==='quick'?7:28} · ${v.mode==='full'?`ROYAUME ${v.owner+1} · `:''}CONTRAT EN COURS</span><h1>${esc(CONTRACT_LABELS[v.contract])}<span class="title-period">.</span></h1><p>${DESCRIPTIONS[v.contract]} · As &gt; 10 &gt; Roi pour les plis · Chef ${esc(playerName(v,v.owner))} ×2</p></div><span class="score-tip">Chef ×2 sur ses points</span></div>
+ ${showScores(v,true)}${disconnectedControls(v)}
+ <section class="felt-board ${isTrix?'board-trix':''}"><div class="felt-pattern"></div><div class="board-topline"><div class="board-label">${isTrix?'PILES DU TRIX':'PLI EN COURS'}${!isTrix&&['king','hearts','general'].includes(v.contract)?`<span class="hearts-status ${v.heartsBroken?'released':'blocked'}">♥ ${v.heartsBroken?'Cœurs libérés':'Cœurs bloqués'}</span>`:''}</div><div class="turn-status ${isMyTurn?'your-turn':''}">${v.locked?'Calcul du pli…':isMyTurn?'À vous de jouer':`${v.seats[v.current]?.bot?'L’IA réfléchit : ':'Tour de '}${esc(playerName(v,v.current))}`}</div></div>
+ ${isTrix?`<div class="trix-player-rail">${relativeSeats.map(seat=>`<div data-chat-seat="${seat}" class="trix-player-box ${v.current===seat?'is-turn':''}"><span class="score-portrait">${avatarSVG(v.seats[seat]?.avatar??0)}</span><div><div class="rail-name">${esc(playerName(v,seat))}${v.seats[seat]?.bot?' · IA':''}</div><div class="rail-count">${v.counts[seat]} cartes</div></div></div>`).join('')}</div><div class="trix-piles">${SUITS.map(suit=>`<div class="trix-suit-row"><span class="trix-suit-name ${suit==='H'||suit==='D'?'red':''}">${SUIT_GLYPHS[suit]}</span><div class="trix-slots">${RANKS.map(r=>`<div class="trix-slot ${(v.piles[suit]||[]).includes(r)?'played':''} ${v.lastAction?.card===suit+r?'just-placed':''} ${suit==='H'||suit==='D'?'red':''}" aria-label="${r} de ${SUIT_LABELS[suit]} ${(v.piles[suit]||[]).includes(r)?'posé':'à poser'}"><span class="mini-rank">${r}</span><span class="mini-suit">${SUIT_GLYPHS[suit]}</span></div>`).join('')}</div></div>`).join('')}</div><div class="trix-finish">${v.finishes.length?`Arrivées : ${v.finishes.map((seat,i)=>`${i+1}. ${esc(playerName(v,seat))}`).join(' · ')}`:'Posez d’abord les valets puis complétez les suites.'}</div>`:
+ `<div class="board-players">${relativeSeats.map((seat,j)=>`<div data-chat-seat="${seat}" class="board-seat bseat-${j} ${v.current===seat?'active-seat':''}"><div class="board-avatar ${v.current===seat?'active':''}">${avatarSVG(v.seats[seat]?.avatar??0)}</div><small>${esc(playerName(v,seat))}${seat===mySeat?' · Vous':''}</small><span class="seat-subline">${v.counts[seat]} cartes · <strong>${format(v.roundScores[seat])} pts</strong></span>${seat!==mySeat?`<div class="mini-deck"><i></i><i></i><i></i></div>`:''}${v.current===seat&&!v.locked?'<span class="turn-dot"></span>':''}</div>`).join('')}
+ <div class="table-cards">${v.trick.length?v.trick.map(({seat,card})=>`<div class="table-card-wrap seat-pos-${seat} ${v.lastAction?.card===card&&v.lastAction?.type==='card'?'moving':''}"><span class="table-player-label">${esc(playerName(v,seat))}</span>${cardHTML(card,'disabled')}<span class="table-suit-label ${card[0]==='H'||card[0]==='D'?'is-red':''}">${SUIT_GLYPHS[card[0]]} ${SUIT_LABELS[card[0]]}</span></div>`).join(''):'<div class="table-placeholder"><span>TRIX</span><small>Les cartes arrivent ici</small></div>'}</div></div>`}
+ 
+ <div class="game-action-log"><span class="action-pip"></span> ${esc(v.lastAction?.text||'La table vous attend…')}</div>
+ ${!isTrix&&last?`<div class="last-result">Dernier pli : <strong>${esc(playerName(v,last.winner))}</strong> · ${format(last.points)} points ${last.isLast?'· BONUS DERNIER PLI':''}</div>`:''}</section>
+ <section class="hand-area"><div class="hand-header"><div><span class="section-kicker">VOTRE MAIN</span><h2>${v.myHand.length} carte${v.myHand.length>1?'s':''}</h2></div><div class="hand-directions">${isMyTurn?(playable.length?`${playable.length} carte${playable.length>1?'s':''} jouable${playable.length>1?'s':''}`:'Aucune carte jouable'):'Attendez votre tour'}</div></div>
+ <div class="hand-cards" aria-label="Vos cartes">${sorted.map(card=>cardHTML(card,`data-action="card" data-card="${card}" ${!isMyTurn||!playable.includes(card)?'disabled':''}`)).join('')}</div><p class="hand-hint">${isTrix?'Poser un As donne immédiatement un autre tour si vous avez une carte jouable. Les joueurs sans pose possible sont passés.':['king','hearts','general'].includes(v.contract)?(v.heartsBroken?'Les cœurs sont libérés : vous pouvez entamer à cœur. Fournissez toujours la couleur demandée.':'Cœurs bloqués : impossible d’entamer à cœur avant une défausse, sauf si vous ne possédez que des cœurs.'):'Fournissez la couleur demandée si vous la possédez. Il n’y a pas d’atout.'}</p></section>
+ <section class="history-strip"><h3>Dernières actions</h3><div class="activity-items">${v.events.length?v.events.slice(0,4).map(e=>`<span>${esc(e.message)}${e.points?` <b>${format(e.points)} pts</b>`:''}</span>`).join(''):'<span>Le tour commence…</span>'}</div></section></main>`;
+}
+function trickCardMini(card){
+ if(!card)return '';
+ const suit=card[0], rank=card.slice(1);
+ return `<span class="captured-card ${suit==='H'||suit==='D'?'red':'black'}"><strong>${esc(rank)}</strong><span>${SUIT_GLYPHS[suit]}</span></span>`;
+}
+function roundTrickRecap(v,s){
+ if(s.contract==='trix'){
+   return `<section class="tricks-recap" aria-label="Classement Trix"><div class="tricks-recap-head"><h2>Ordre d’arrivée du Trix</h2><span>Aucun pli en Trix</span></div><div class="trix-arrival-list">${(s.finishes||[]).map((seat,i)=>`<div class="trix-arrival-row"><span class="trick-number">${i+1}</span><strong>${esc(playerName(v,seat))}</strong><span class="trick-points ${s.scores[seat]<0?'negative':''}">${format(s.scores[seat])} pts ${seat===s.owner?'· Chef ×2':''}</span></div>`).join('')}</div></section>`;
+ }
+ const tricks=s.tricks||[];
+ const counts=[0,0,0,0];
+ for(const t of tricks)if(t.winner>=0&&t.winner<4)counts[t.winner]++;
+ return `<section class="tricks-recap" aria-label="Récapitulatif des plis remportés"><div class="tricks-recap-head"><div><span class="section-kicker">CARTE PAR CARTE</span><h2>Récapitulatif des ${tricks.length} plis</h2><p>${s.earlyStop?"Le Roi de cœur a été capturé : la manche s’est arrêtée aussitôt.":"Chaque pli indique les 4 cartes jouées, son vainqueur et les points de pénalité."}</p></div><span class="tricks-count-pill">${tricks.length} / 8 plis${s.earlyStop?" · Roi capturé":""}</span></div>
+  <div class="trick-count-grid">${counts.map((cnt,seat)=>`<div class="trick-count-tile"><span class="trick-count-name">${esc(playerName(v,seat))}${seat===s.owner?' · Chef ×2':''}</span><strong>${cnt}</strong><small>pli${cnt!==1?'s':''} remporté${cnt!==1?'s':''}</small></div>`).join('')}</div>
+  <div class="tricks-list">${tricks.map(t=>{
+    const parts=[];
+    if(t.details?.hasKing && ['king','general'].includes(s.contract))parts.push('Roi ♥ +80');
+    if(t.details?.queens && ['queens','general'].includes(s.contract))parts.push(`${t.details.queens} dame${t.details.queens>1?'s':''} : +${t.details.queens*30} pts (30 par Dame)`);
+    if(t.details?.hearts && ['hearts','general'].includes(s.contract))parts.push(`${t.details.hearts} cœur${t.details.hearts>1?'s':''} +${t.details.hearts*10}`);
+    if(['tricks','general'].includes(s.contract))parts.push('Pli +10');
+    if(t.isLast)parts.push('Bonus séparé du dernier pli : +40 pts');
+    if(!parts.length)parts.push('Aucune pénalité sur ce pli');
+    return `<article class="trick-detail"><div class="trick-detail-head"><span class="trick-number">${String(t.number).padStart(2,'0')}</span><div class="trick-winner"><span>Pli ${t.number}${t.isLast?' · dernier pli':''}</span><strong>Remporté par ${esc(playerName(v,t.winner))}</strong></div><span class="trick-points ${t.points===0?'zero':''}">${format(t.points)} pts${t.doubled?' <small>×2 chef</small>':''}</span></div>
+    <div class="trick-played-cards">${(t.plays||[]).map(p=>`<div class="trick-play ${p.seat===t.winner?'win':''}" title="${esc(playerName(v,p.seat))}"><span class="played-by">${esc(playerName(v,p.seat))}</span>${trickCardMini(p.card)}${p.seat===t.winner?'<span class="played-winner">Gagnant</span>':''}</div>`).join('')}</div><div class="trick-breakdown">${parts.map(part=>`<span>${esc(part)}</span>`).join('')}</div></article>`;
+  }).join('')}</div></section>`;
+}
+function renderRoundEnd(v){
+ const s=v.roundSummary;if(!s)return '<p>Manche terminée.</p>';
+ const ranking=[0,1,2,3].sort((a,b)=>s.scores[a]-s.scores[b]);
+ return `${header(v)}<main class="game-main"><div class="result-header"><span class="section-kicker">FIN DE LA MANCHE ${v.roundNumber+1}</span><div class="result-glyph">${SYMBOL[s.contract]}</div><h1>${esc(s.contractLabel)}<span class="title-period">.</span></h1><p>Les points de cette manche ont été ajoutés au classement général. ${esc(playerName(v,s.owner??v.owner))} (chef de manche) : points ×2.</p></div><section class="results-card"><h2>Points de la manche</h2>${s.contract==='queens'?'<p class="queen-scoring-note">Dames : +30 par Dame capturée. Dernier pli : bonus séparé de +40. Le chef double uniquement ses propres pénalités.</p>':''}${ranking.map((seat,i)=>`<div class="result-row"><span class="result-pos">${String(i+1).padStart(2,'0')}</span><span class="result-name">${esc(playerName(v,seat))}${seat===(s.owner??v.owner)?' <span class="chef-double">Chef ×2</span>':''}</span><strong class="${s.scores[seat]<0?'negative':''}">${format(s.scores[seat])} pts</strong></div>`).join('')}</section>${roundTrickRecap(v,s)}<div class="results-bottom">${showScores(v,true)}${disconnectedControls(v)}<button class="primary-btn next-btn" data-action="next">${v.roundNumber+1===(v.mode==='quick'?7:28)?'Voir le classement final':'Manche suivante'} <span>→</span></button></div></main>`;
+}
+
+function renderEnd(v){
+ const ranking=[0,1,2,3].sort((a,b)=>v.scores[a]-v.scores[b]);
+ return `${header(v)}<main class="game-main"><div class="result-header"><span class="section-kicker">PARTIE TERMINÉE · ${v.mode==='quick'?'7':'28'} MANCHES</span><div class="trophy-outline">★</div><h1>La victoire est à <em>${esc(playerName(v,ranking[0]))}</em><span class="title-period">.</span></h1><p>Le score le plus bas remporte la partie.</p></div><section class="results-card end-card"><h2>Classement final</h2>${ranking.map((seat,i)=>`<div class="result-row ${i===0?'winner':''}"><span class="result-pos">${String(i+1).padStart(2,'0')}</span><span class="result-name">${esc(playerName(v,seat))} ${i===0?'<span class="winner-tag">VAINQUEUR</span>':''}</span><strong>${format(v.scores[seat])} pts</strong></div>`).join('')}</section>${host?'<button class="primary-btn next-btn" data-action="reset">Nouvelle partie avec les mêmes joueurs <span>→</span></button>':'<p class="waiting-state">L’hôte peut relancer une nouvelle partie.</p>'}<div class="history-strip"><h3>Historique des manches</h3>${v.history.map((s,i)=>`<div class="history-row"><span>${i+1}. ${esc(s.contractLabel)}</span><strong>${s.scores.map(format).join(' · ')}</strong></div>`).join('')}</div></main>`;
+}
+function rulesOverlay(){return `<div class="overlay" data-action="close-rules"><div class="rules-modal" role="dialog" aria-modal="true" aria-label="Règles du jeu"><div class="rules-top"><div><span class="section-kicker">LES RÈGLES</span><h2>Trix, version belote.</h2></div><button class="close-btn" data-action="close-rules">×</button></div><p>4 participants (amis et/ou IA), 32 cartes (7, 8, 9, 10, V, D, R, As). Le joueur qui a le moins de points à la fin gagne. Pas d’atout ; obligation de fournir la couleur aux plis.</p><div class="rules-list">${CONTRACTS.map(c=>`<div><strong><span>${SYMBOL[c]}</span> ${CONTRACT_LABELS[c]}</strong><small>${DESCRIPTIONS[c]}</small></div>`).join('')}</div><div class="rules-note"><strong>Force des cartes</strong> Pour les 6 contrats à plis : As &gt; 10 &gt; Roi &gt; Dame &gt; Valet &gt; 9 &gt; 8 &gt; 7. Dans Trix, l’ordre des suites reste 7, 8, 9, 10, Valet, Dame, Roi, As. <strong>Chef du contrat :</strong> les points qu’il gagne ou reçoit sont multipliés par 2, y compris les points négatifs du Trix. Les autres joueurs gardent leur score normal.</div><div class="rules-note"><strong>Blocage des cœurs</strong> Pour les contrats Roi de cœur, Cœurs et Générale : interdiction de commencer un pli à cœur tant que les cœurs ne sont pas libérés. Ils sont libérés dès qu'un cœur est joué en défausse (impossible de fournir la couleur). Si la main ne contient plus que des cœurs, on peut tout de même entamer à cœur. L'obligation de fournir la couleur s'applique toujours.</div><div class="rules-note"><strong>Règle commune</strong> Le joueur qui remporte le dernier pli effectivement joué reçoit +40 points, dans tous les contrats sauf Trix. En Roi de cœur, la manche s’arrête après le pli qui capture le Roi : ce pli devient le dernier. En « Dernier pli », ces 40 points ne comptent qu’une fois. En Générale, les pénalités de tous les contrats de plis sont cumulées.</div><p class="rules-foot">Trix : poser les valets puis compléter chaque famille du 7 à l’As ; poser un As donne un tour supplémentaire si une autre carte est jouable. Les joueurs sans pose possible sont passés automatiquement. 1er : −100 points, 2e : −50 points. Les deux derniers ne reçoivent aucun point.</p></div></div>`;}
+
+// Chat en temps réel : messages relayés par l’hôte, jamais mélangés aux données du jeu.
+const socialRoot=document.getElementById('social-root');
+function cleanChat(m){
+ if(!m||!Number.isInteger(m.seat)||m.seat<0||m.seat>3||typeof m.text!=='string')return null;
+ const t=m.text.trim().slice(0,280);if(!t)return null;
+ return {id:String(m.id??''),seat:m.seat,name:String(m.name||'Joueur').slice(0,20),text:t,at:Number(m.at)||Date.now()};
+}
+function chatTime(ts){return new Date(ts).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});}
+// A separate, short-lived bubble is associated with the player who sent the message.
+// It is rendered beside their avatar/name, not over the centre of the cards.
+function updateChatBubbles(){
+ const now=Date.now();
+ document.querySelectorAll('[data-chat-seat]').forEach(anchor=>{
+  const seat=Number(anchor.dataset.chatSeat),bubble=social.bubbles.get(seat);
+  anchor.querySelector(':scope > .player-chat-bubble')?.remove();
+  if(!bubble||bubble.until<=now)return;
+  const node=document.createElement('div');
+  node.className='player-chat-bubble';
+  node.setAttribute('role','status');
+  node.title=bubble.text;
+  node.textContent=bubble.text;
+  anchor.appendChild(node);
+ });
+}
+function showSeatChatBubble(m){
+ const seat=m.seat,until=Date.now()+5200;
+ social.bubbles.set(seat,{text:m.text,until,id:m.id});
+ clearTimeout(chatBubbleTimers.get(seat));
+ const id=setTimeout(()=>{
+  if(social.bubbles.get(seat)?.id===m.id){
+   social.bubbles.delete(seat);
+   updateChatBubbles();
+  }
+  chatBubbleTimers.delete(seat);
+ },5200);
+ chatBubbleTimers.set(seat,id);
+ updateChatBubbles();
+}
+function receiveChat(raw){
+ const m=cleanChat(raw);if(!m)return;
+ if(social.messages.some(x=>x.id===m.id&&x.id))return;
+ social.messages.push(m);social.messages=social.messages.slice(-60);
+ if(m.seat!==mySeat&&!social.open)social.unread=Math.min(99,social.unread+1);
+ showSeatChatBubble(m);
+ renderSocial();
+}
+function relayChat(seat,rawText){
+ if(!game||localOnly||!game.seats[seat]||game.seats[seat].bot||typeof rawText!=='string')return;
+ const t=rawText.trim().slice(0,280);if(!t)return;
+ const now=Date.now();if(now-(social.lastChatBySeat.get(seat)||0)<500)return;
+ social.lastChatBySeat.set(seat,now);
+ const m={id:`${room}-${++social.nextId}`,seat,name:game.seats[seat].name,text:t,at:now};
+ receiveChat(m);
+ for(const c of links.keys())if(c.open)try{c.send({type:'chat-message',message:m});}catch{}
+}
+function sendChat(text){
+ if(!text||!text.trim())return;
+ if(host)relayChat(0,text);
+ else if(conn?.open)conn.send({type:'chat',text:text.slice(0,280)});
+ else setNotice('Salon déconnecté : message non envoyé.');
+}
+function voiceRoster(){
+ if(!game)return [];
+ const res=[];
+ if(peer?.id&&game.seats[0]?.connected)res.push({peerId:peer.id,seat:0,name:game.seats[0].name,active:social.voiceOn});
+ for(const [c,seat] of links)if(c.open&&game.seats[seat]&&!game.seats[seat].bot)
+   res.push({peerId:c.peer,seat,name:game.seats[seat].name,active:!!social.guestVoice.get(c.peer)});
+ return res;
+}
+function broadcastRoster(){
+ if(!host||localOnly||!game)return;
+ social.roster=voiceRoster();
+ for(const c of links.keys())if(c.open)try{c.send({type:'voice-roster',roster:social.roster});}catch{}
+ syncVoiceCalls();renderSocial();
+}
+function notifyVoiceStatus(){
+ if(host)broadcastRoster();
+ else if(conn?.open)try{conn.send({type:'voice-status',active:social.voiceOn});}catch{}
+ renderSocial();
+}
+function cleanupCall(id){
+ const a=social.audios.get(id);if(a){a.pause();a.srcObject=null;a.remove();social.audios.delete(id);}
+ social.calls.delete(id);
+ renderSocial();
+}
+function attachVoiceCall(call){
+ const id=call.peer;
+ const old=social.calls.get(id);
+ if(old&&old!==call){try{old.close();}catch{}}
+ social.calls.set(id,call);
+ call.on('stream',stream=>{
+   let el=social.audios.get(id);
+   if(!el){el=document.createElement('audio');el.autoplay=true;el.playsInline=true;el.setAttribute('aria-hidden','true');document.body.appendChild(el);social.audios.set(id,el);}
+   el.srcObject=stream;
+   el.play().catch(()=>{setNotice('Audio distant bloqué : appuie sur le bouton Vocal pour autoriser le son.');});
+   renderSocial();
+ });
+ call.on('close',()=>{if(social.calls.get(id)===call)cleanupCall(id);});
+ call.on('error',()=>{if(social.calls.get(id)===call)cleanupCall(id);});
+}
+function receiveVoiceCall(call){
+ if(!social.voiceOn||!social.stream||localOnly||!social.roster.some(r=>r.peerId===call.peer)){
+   try{call.close();}catch{}return;
+ }
+ attachVoiceCall(call);
+ try{call.answer(social.stream);}catch{try{call.close();}catch{}}
+}
+function syncVoiceCalls(){
+ if(!social.voiceOn||!social.stream||!peer?.id)return;
+ const target=new Set(social.roster.filter(r=>r.active&&r.peerId!==peer.id).map(r=>r.peerId));
+ for(const [id,call] of [...social.calls])if(!target.has(id)){try{call.close();}catch{}cleanupCall(id);}
+ for(const id of target){
+   // Pour éviter deux appels parallèles, le peer d’identifiant inférieur appelle.
+   if(peer.id.localeCompare(id)>=0||social.calls.has(id))continue;
+   try{const call=peer.call(id,social.stream);if(call)attachVoiceCall(call);}catch{}
+ }
+}
+async function toggleVoice(){
+ if(localOnly||!peer||!(host||conn?.open)){setNotice('Le vocal nécessite un salon connecté avec des amis.');return;}
+ if(social.voiceOn){stopVoice();return;}
+ if(!navigator.mediaDevices?.getUserMedia){setNotice('Micro indisponible : ouvre le jeu via une adresse HTTPS.');return;}
+ try{
+   const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},video:false});
+   if(!peer||localOnly){stream.getTracks().forEach(t=>t.stop());return;}
+   social.stream=stream;social.voiceOn=true;social.muted=false;
+   stream.getAudioTracks().forEach(t=>t.onended=()=>{if(social.voiceOn)stopVoice();});
+   notifyVoiceStatus();syncVoiceCalls();
+ }catch(e){setNotice(e?.name==='NotAllowedError'?'Accès au micro refusé : autorise le micro dans le navigateur.':'Impossible d’activer le micro : '+(e?.message||'erreur'));}
+}
+function stopVoice(silent=false){
+ const wasOn=social.voiceOn;
+ social.voiceOn=false;social.muted=false;
+ for(const c of social.calls.values())try{c.close();}catch{}
+ social.calls.clear();
+ for(const a of social.audios.values()){a.pause();a.srcObject=null;a.remove();}
+ social.audios.clear();
+ if(social.stream){for(const track of social.stream.getTracks())try{track.stop();}catch{}social.stream=null;}
+ if(wasOn&&!silent)notifyVoiceStatus();
+ if(!silent)renderSocial();
+}
+function toggleMute(){
+ if(!social.voiceOn||!social.stream)return;
+ social.muted=!social.muted;
+ for(const t of social.stream.getAudioTracks())t.enabled=!social.muted;
+ renderSocial();
+}
+function renderSocial(scrollToBottom=false){
+ const v=displayView(),online=!!v&&!localOnly&&(host?!!peer?.open:!!conn?.open),visible=!!v&&!localOnly;
+ if(!visible){socialRoot.innerHTML='';document.body.classList.remove('social-chat-open');return;}
+ const oldInput=socialRoot.querySelector('#chat-text'),draft=oldInput?.value||'';
+ const inputFocused=document.activeElement===oldInput;
+ const list=socialRoot.querySelector('.chat-messages');const oldScroll=list?.scrollTop||0;
+ const atBottom=!list||list.scrollHeight-list.scrollTop-list.clientHeight<75;
+ document.body.classList.toggle('social-chat-open',social.open);
+ const members=v.seats.filter(s=>s&&!s.bot).length;
+ const vocalCount=social.roster.filter(r=>r.active).length;
+ socialRoot.innerHTML=`<div class="social-toolbar" aria-label="Communication dans le salon">
+ <button type="button" data-social="toggle-chat" class="social-tool ${social.open?'is-active':''}" aria-expanded="${social.open}" title="Discussion écrite">◉ <span>Chat${social.unread?` <b class="chat-unread">${social.unread}</b>`:''}</span></button>
+ <button type="button" data-social="toggle-voice" class="social-tool ${social.voiceOn?'is-active':''}" aria-pressed="${social.voiceOn}" title="${social.voiceOn?'Quitter le salon vocal':'Activer son micro et rejoindre le vocal'}">${social.voiceOn?'◖))':'◖'} <span>${social.voiceOn?'Vocal actif':'Vocal'}</span></button>
+ ${social.voiceOn?`<button type="button" data-social="mute" class="social-tool ${social.muted?'is-muted':''}" aria-pressed="${social.muted}">${social.muted?'Micro coupé':'Couper micro'}</button>`:''}
+ </div>
+ ${social.open?`<section class="chat-panel" id="trix-chat" aria-label="Discussion du salon"><header class="chat-panel-head"><div><strong>Discussion du salon</strong><small>Historique défilant · 60 derniers messages · ${members} humain${members>1?'s':''} · ${vocalCount} en vocal · ${online?'Connecté':'Connexion interrompue'}</small></div><button type="button" data-social="toggle-chat" aria-label="Fermer la discussion">×</button></header>
+ <div class="chat-messages" role="log" aria-live="polite" aria-relevant="additions" aria-label="Messages reçus">${social.messages.length?social.messages.map(m=>`<article class="chat-message ${m.seat===mySeat?'mine':''}"><div><b>${esc(m.name)}</b><time>${chatTime(m.at)}</time></div><p>${esc(m.text)}</p></article>`).join(''):'<p class="chat-empty">Aucun message pour le moment.</p>'}</div>
+ <form class="chat-form" id="chat-form"><input id="chat-text" autocomplete="off" maxlength="280" placeholder="Écris à tes amis…" aria-label="Message à envoyer" ${online?'':'disabled'}/><button type="submit" ${online?'':'disabled'}>Envoyer</button></form>
+ <div class="voice-hint">${social.voiceOn?'Micro '+(social.muted?'coupé':'ouvert')+' · '+social.calls.size+' connexion(s) vocales':'Le micro est désactivé par défaut. Le vocal exige HTTPS et une autorisation du navigateur.'}</div></section>`:''}`;
+ if(social.open){
+   const inp=socialRoot.querySelector('#chat-text');if(inp)inp.value=draft;
+   if(inputFocused&&inp){inp.focus();inp.setSelectionRange(inp.value.length,inp.value.length);}
+   const sc=socialRoot.querySelector('.chat-messages');if(sc)sc.scrollTop=scrollToBottom||atBottom?sc.scrollHeight:oldScroll;
+ }
+}
+socialRoot.addEventListener('click',e=>{
+ const b=e.target.closest('[data-social]');if(!b)return;
+ audio.ensure();audio.begin();
+ if(b.dataset.social==='toggle-chat'||b.dataset.social==='open-chat'){
+   if(b.dataset.social==='open-chat')social.open=true;else social.open=!social.open;
+   if(social.open){social.unread=0;social.alerts=[];}
+   renderSocial();
+   if(social.open&&window.innerWidth<1350)requestAnimationFrame(()=>socialRoot.querySelector('#trix-chat')?.scrollIntoView({block:'nearest',behavior:'smooth'}));
+ }else if(b.dataset.social==='toggle-voice')toggleVoice();
+ else if(b.dataset.social==='mute')toggleMute();
+});
+socialRoot.addEventListener('submit',e=>{
+ if(e.target.id!=='chat-form')return;e.preventDefault();
+ const input=socialRoot.querySelector('#chat-text');const value=input?.value||'';if(!value.trim())return;
+ if(input)input.value='';sendChat(value);
+});
+
+function render(){
+ const v=displayView();
+ root.innerHTML=(v?(v.phase==='lobby'?renderLobby(v):v.phase==='select'?renderSelect(v):v.phase==='play'?renderPlaying(v):v.phase==='roundEnd'?renderRoundEnd(v):renderEnd(v)):(connecting?`<div class="connect-screen"><div class="brand"><span class="logo-mark">TRIX.</span></div><div class="spin"></div><h1>Connexion au salon ${esc(room)}…</h1><p>La table se prépare.</p><button class="outline-btn" data-action="leave">Retour</button></div>`:renderLanding()))+(status?`<div class="toast" role="status">${esc(status)} <button data-action="dismiss">×</button></div>`:'')+(showRules?rulesOverlay():'');
+ renderSocial();
+ updateChatBubbles();
+}
+root.addEventListener('input',e=>{
+ if(e.target.id==='player-name'||e.target.id==='join-name')name=e.target.value;
+ if(e.target.id==='room-code')roomInput=e.target.value.toUpperCase();
+});
+root.addEventListener('click',e=>{
+ const b=e.target.closest('[data-action]');if(!b)return;
+ const a=b.dataset.action;
+ if(a!=='music'&&a!=='sound'){audio.ensure();audio.begin();}
+ if(a==='music'){audio.toggle('music');return;}
+ if(a==='sound'){audio.toggle('sound');return;}
+ if(a==='avatar'){selectedAvatar=Number(b.dataset.avatar);localStorage.setItem('trix_avatar',String(selectedAvatar));if(displayView()?.phase==='lobby'&&mySeat>=0){action({kind:'avatar',avatar:selectedAvatar});}else{render();}return;}
+ if(a==='close-rules'){if(e.target===b||b.classList.contains('close-btn')){showRules=false;render();}return;}
+ if(a==='rules'){showRules=true;render();return;}
+ if(a==='dismiss'){status='';render();return;}
+ if(a==='setmode'){selectedMode=b.dataset.mode;render();return;}
+ if(a==='create'){startHosting(false);return;}
+ if(a==='solo'){startOffline();return;}
+ if(a==='recover'){roomInput=b.dataset.room;startHosting(true);return;}
+ if(a==='join'){joinRoom();return;}
+ if(a==='leave'){if(game?.phase==='play'||game?.phase==='select'){if(!confirm('Quitter la table ? La partie en cours ne sera plus affichée.'))return;}resetConnections();render();return;}
+ if(a==='copy-invite'){copyValue(inviteText());return;}
+ if(a==='addbot'){action({kind:'addbot',seat:Number(b.dataset.seat)});return;}
+ if(a==='fillbots'){action({kind:'fillbots'});return;}
+ if(a==='beginwithbots'){action({kind:'beginwithbots'});return;}
+ if(a==='replacebot'){action({kind:'replacebot',seat:Number(b.dataset.seat)});return;}
+ if(a==='begin'){action({kind:'begin'});return;}
+ if(a==='choose'){action({kind:'choose',contract:b.dataset.contract});return;}
+ if(a==='card'){action({kind:'card',card:b.dataset.card});return;}
+ if(a==='next'){action({kind:'next'});return;}
+ if(a==='reset'){action({kind:'reset'});return;}
+ if(a==='remove'){action({kind:'remove',seat:Number(b.dataset.seat)});return;}
+});
+window.addEventListener('beforeunload',()=>{if(host)persistHost();});
+render();
+
+</script>
+</body>
+</html>

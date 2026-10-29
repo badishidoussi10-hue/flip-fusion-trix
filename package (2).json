@@ -1,0 +1,13 @@
+{
+  "name": "flip-fusion-trix",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Two card games on one Render web service: Flip Fusion V13 and TRIX V13",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
